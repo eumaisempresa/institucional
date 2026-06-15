@@ -183,11 +183,9 @@
             text-align: center;
             position: relative;
             padding: 120px 0 80px 0;
-            /* Gradiente radial sutil no canto superior direito */
             background: radial-gradient(circle at top right, rgba(196,151,74,0.06), transparent 50%);
         }
         
-        /* Emblema - Círculos Concêntricos */
         .emblem-container {
             display: flex;
             justify-content: center;
@@ -294,7 +292,30 @@
             margin-bottom: 12px;
         }
 
-        /* --- 4. SEÇÃO AS 4 CAMADAS --- */
+        /* --- 4. SEÇÃO ORGANIZAÇÃO --- */
+        .org-container {
+            background-color: var(--fundo-secundario);
+            border: 1px solid var(--borda-sutil);
+            padding: 40px;
+            border-radius: var(--radius-padrao);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .org-item {
+            margin-bottom: 24px;
+            padding-left: 16px;
+            border-left: 2px solid var(--destaque-dourado);
+        }
+        .org-item h4 {
+            font-size: 1.2rem;
+            color: var(--texto-principal);
+        }
+        .org-item p {
+            color: var(--texto-secundario);
+            font-size: 0.9rem;
+        }
+
+        /* --- 5. SEÇÃO AS 4 CAMADAS --- */
         .section-title {
             font-size: 2.2rem;
             text-align: center;
@@ -335,33 +356,18 @@
             margin-bottom: 12px;
         }
 
-        /* --- 5. SEÇÃO ORGANIZAÇÃO --- */
-        .org-container {
-            background-color: var(--fundo-secundario);
-            border: 1px solid var(--borda-sutil);
-            padding: 40px;
-            border-radius: var(--radius-padrao);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .org-item {
-            margin-bottom: 24px;
-            padding-left: 16px;
-            border-left: 2px solid var(--destaque-dourado);
-        }
-        .org-item h4 {
-            font-size: 1.2rem;
-            color: var(--texto-principal);
-        }
-        .org-item p {
-            color: var(--texto-secundario);
-            font-size: 0.9rem;
-        }
-
-        /* --- 6. SEÇÃO GOVERNANÇA E SANFONAS (ACCORDION) --- */
+        /* --- 6. SEÇÃO GOVERNANÇA E REPOSITÓRIO (ACCORDION) --- */
         .accordion-wrapper {
             max-width: 800px;
             margin: 0 auto;
+        }
+        .gov-subheading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--texto-principal);
+            margin: 30px 0 15px 0;
+            border-bottom: 1px solid rgba(196, 151, 74, 0.1);
+            padding-bottom: 5px;
         }
         details {
             background-color: var(--fundo-secundario);
@@ -376,14 +382,14 @@
         summary {
             padding: 18px 24px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--destaque-dourado);
             cursor: pointer;
             list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
+            font-weight: 500;
         }
         summary::after {
             content: "+";
@@ -404,6 +410,10 @@
             padding-top: 16px;
         }
         .details-content p {
+            margin-bottom: 12px;
+        }
+        .details-content ul {
+            margin-left: 20px;
             margin-bottom: 12px;
         }
 
@@ -569,7 +579,6 @@
             color: var(--fundo-principal);
             transform: scale(1.05);
         }
-        /* Classe para acionamento via JavaScript */
         .fab-container.ativo .fab-menu-itens {
             display: flex;
         }
@@ -586,7 +595,7 @@
 
         /* --- RESPONSIVIDADE (MOBILE) --- */
         @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Simplificação mobile para focar no conteúdo */
+            .nav-menu { display: none; }
             .hero-title { font-size: 2rem; }
             .hero-principles, .mvv-grid, .camadas-grid, .lab-grid, .seo-grid, .footer-grid {
                 grid-template-columns: 1fr;
@@ -601,314 +610,8 @@
     <!-- 1. NAVBAR / CABEÇALHO -->
     <header>
         <div class="container nav-container">
-            <a href="#" class="nav-logo <span class="marca-eu">EU<sup>+</sup></span></a>
+            <a href="#" class="nav-logo"><span class="marca-eu">EU<sup>+</sup></span></a>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#" class="nav-link">Home</a></li>
-                    <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
-                    <li><a href="#organizacao" class="nav-link">Organização</a></li>
-                    <li><a href="#camadas" class="nav-link">As Camadas</a></li>
-                    <li><a href="#governanca" class="nav-link">Governança</a></li>
-                    <li><a href="#laboratorio" class="nav-link">Laboratório</a></li>
-                    <li><a href="#conhecimento" class="nav-link">Conhecimento</a></li>
-                    <li><a href="#contato" class="nav-link">Ouvidoria</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- 2. SEÇÃO HERO -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="emblem-container">
-                <div class="emblem-axes"></div>
-                <div class="circle-emblem circle-1"></div>
-                <div class="circle-emblem circle-2"></div>
-                <div class="circle-emblem circle-3"></div>
-                <div class="emblem-center"></div>
-            </div>
-            <h1 class="hero-title">Ecossistema de inteligência aplicada.</h1>
-            <p class="hero-subtitle">Reduzindo complexidade operacional, cognitiva e organizacional através de estruturas simples, acessíveis e progressivamente inteligentes.</p>
-            
-            <a href="./frentes/index.html" class="btn-primario">Conheça o Econegócio EU⁺</a>
-
-            <div class="hero-principles">
-                <div class="principle-card">
-                    <h3>Soberania</h3>
-                    <p>Garantia de autonomia, preservação de governança e controle absoluto sobre os ativos intelectuais e rumos do ecossistema.</p>
-                </div>
-                <div class="principle-card">
-                    <h3>Leveza</h3>
-                    <p>Redução sistemática do atrito, da burocracia e do peso operacional para que o crescimento ocorra sem sobrecarga humana.</p>
-                </div>
-                <div class="principle-card">
-                    <h3>Democratização</h3>
-                    <p>Permitir que pequenas iniciativas tenham acesso a capacidades estruturais historicamente reservadas a grandes corporações.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. SEÇÃO MANIFESTO -->
-    <section id="manifesto">
-        <div class="container">
-            <h2 class="manifesto-quote">“O <span class="marca-eu">EU<sup>+</sup></span> não substitui o responsável. O <span class="marca-eu">EU<sup>+</sup></span> <em>amplifica aquilo que ele já é</em>.”</h2>
-            <div class="manifesto-text">
-                <p>O Grupo EU⁺ opera sobre a tese fundamental de que a sobrecarga humana não nasce da falta de capacidade, mas da falta de estrutura. Pessoas possuem conhecimento, empresas possuem potencial, igrejas possuem propósito e empreendedores possuem ideias — contudo, a centralização excessiva paralisa a evolução. Nós competimos pela simplicidade com profundidade, desenhando caminhos onde o básico resolve de fato e o crescimento acontece por evolução natural.</p>
-            </div>
-            <div class="mvv-grid">
-                <div class="mvv-card">
-                    <h4>Missão</h4>
-                    <p>Prover estrutura para quem carrega grandes responsabilidades, descentralizando o peso da evolução contínua.</p>
-                </div>
-                <div class="mvv-card">
-                    <h4>Visão</h4>
-                    <p>Ser a matriz intelectual de referência em simplificação operacional e otimização por meio de inteligências integradas.</p>
-                </div>
-                <div class="mvv-card">
-                    <h4>Valores</h4>
-                    <p>Soberania conceitual, humildade operacional no servir, gravidade patrimonial e clareza absoluta de propósito.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. SEÇÃO ORGANIZAÇÃO -->
-    <section id="organizacao">
-        <div class="container">
-            <h2 class="section-title">Estrutura Organizacional</h2>
-            <p class="section-subtitle">Alçadas de governança e ordenação funcional do ecossistema.</p>
-            
-            <div class="org-container">
-                <div class="org-item">
-                    <h4>Presidência do Grupo EU⁺</h4>
-                    <p>Direção macroestratégica, custódia constitucional e validação de compatibilidade identitária de novos ativos.</p>
-                </div>
-                <div class="org-item">
-                    <h4>Board & Conselho Consultivo</h4>
-                    <p>Colegiado de orientação de valor, análise de riscos e alinhamento do ecossistema econômico de longo prazo.</p>
-                </div>
-                <div class="org-item">
-                    <h4>Corpo Gerencial e Operacional</h4>
-                    <p>Gerenciamento das entregas de mercado, relacionamento ativo e funcionamento das engrenagens das frentes.</p>
-                </div>
-                <div class="org-item">
-                    <h4>Corpo Técnico & Motores Cognitivos</h4>
-                    <p>Execução e manutenção de infraestruturas, desenvolvimento de micro-SaaS e orquestração de agentes artificiais.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. SEÇÃO AS 4 CAMADAS -->
-    <section id="camadas">
-        <div class="container">
-            <h2 class="section-title">As Quatro Camadas Operacionais</h2>
-            <p class="section-subtitle">A matriz de engenharia que direciona o fluxo do conhecimento ao impacto real.</p>
-            
-            <div class="camadas-grid">
-                <div class="camada-card">
-                    <div class="camada-num">I</div>
-                    <h3>Inteligência</h3>
-                    <p>O núcleo de processamento cognitivo. Focado em análise contextual profunda, síntese de dados e descoberta de caminhos ótimos através de inteligência artificial aplicada.</p>
-                </div>
-                <div class="camada-card">
-                    <div class="camada-num">II</div>
-                    <h3>Estruturação</h3>
-                    <p>Modelagem metodológica. Onde os desafios e as demandas mapeadas são decodificados e transformados em frameworks limpos, processos replicáveis e ferramentas ágeis.</p>
-                </div>
-                <div class="camada-card">
-                    <div class="camada-num">III</div>
-                    <h3>Patrimônio</h3>
-                    <p>A custódia do conhecimento vivo. Infraestrutura responsável pela preservação, auditoria, versionamento e higienização das bases de dados intelectuais do grupo.</p>
-                </div>
-                <div class="camada-card">
-                    <div class="camada-num">IV</div>
-                    <h3>Aplicação</h3>
-                    <p>O impacto prático em campo. Onde as soluções e ferramentas ganham vida e operam diretamente na transformação das frentes de mercado do ecossistema.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. SEÇÃO GOVERNANÇA (SANFONAS) -->
-    <section id="governanca">
-        <div class="container">
-            <h2 class="section-title">Governança & Repositório Estratégico</h2>
-            <p class="section-subtitle">Documentações oficiais estáveis indexadas para transparência e auditoria de IA.</p>
-            
-            <div class="accordion-wrapper">
-                
-                <!-- Sanfona 1 -->
-                <details>
-                    <summary>1.1 Constituição do Grupo EU⁺ V.1.0</summary>
-                    <div class="details-content">
-                        <p><strong>Estatuto de Fundamentos Superiores:</strong> Este documento estabelece os limites jurídicos, éticos e operacionais invioláveis do Grupo EU⁺. Determina que a identidade institucional precede as ferramentas e regula a soberania das decisões humanas sobre quaisquer automações.</p>
-                        <p>[Insira aqui o texto integral e detalhado da constituição para indexação completa do Google...]</p>
-                    </div>
-                </details>
-
-                <!-- Sanfona 2 -->
-                <details>
-                    <summary>1.6 Estratégia de Valor e Crescimento</summary>
-                    <div class="details-content">
-                        <p>O Grupo EU⁺ existe para reduzir complexidade através de estruturas progressivamente inteligentes. O cliente não compra telas ou códigos; compra a redução drástica de sua sobrecarga.</p>
-                        <p><strong>Crescimento por Evolução:</strong> Nossos produtos de entrada resolvem demandas reais sem travas artificiais. O upgrade ocorre de forma orgânica à medida que a maturidade estrutural e a necessidade de escala do cliente aumentam.</p>
-                    </div>
-                </details>
-
-                <!-- Sanfona 3 -->
-                <details>
-                    <summary>2.1 Diretrizes do Projeto-Mãe</summary>
-                    <div class="details-content">
-                        <p>Matriz técnica que regula o ecossistema. Determina a divisão em quatro núcleos funcionais autônomos (Inteligência, Estruturação, Patrimônio e Aplicação) garantindo que o conhecimento gerado seja perene, reutilizável e auditável.</p>
-                        <p>[Insira aqui as regras de engenharia sistêmica e fluxos de dados do Projeto-Mãe...]</p>
-                    </div>
-                </details>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. SEÇÃO LABORATÓRIO -->
-    <section id="laboratorio">
-        <div class="container">
-            <h2 class="section-title">Laboratório de Pesquisa & Desenvolvimento</h2>
-            <p class="section-subtitle">Projetos ativos, testes conceituais e pilotos de novas tecnologias.</p>
-            
-            <div class="lab-grid">
-                <div class="lab-card">
-                    <span class="lab-tag">Em Andamento</span>
-                    <h3>Orquestração Baseada em Contexto</h3>
-                    <p>Refinamento de arquiteturas de prompts mestres e agentes especialistas para atuarem na automação de processos internos sem perda de governança de dados.</p>
-                </div>
-                <div class="lab-card">
-                    <span class="lab-tag">Validação</span>
-                    <h3>Integrações com Webhooks Gratuitos</h3>
-                    <p>Desenho de fluxos lógicos usando Make e n8n para conectar canais de atendimento a bancos de dados estruturados em nuvem sem custos iniciais de licença.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. BASE DE CONHECIMENTO (SEO) -->
-    <section id="conhecimento">
-        <div class="container">
-            <h2 class="section-title">Base de Conhecimento</h2>
-            <p class="section-subtitle">Artigos técnicos e respostas estruturadas para mecanismos de busca orgânica.</p>
-            
-            <div class="seo-grid">
-                <div class="seo-card">
-                    <h4>Por que a memória falha na gestão?</h4>
-                    <p>Como a falta de processos claros cria gargalos invisíveis que sobrecarregam líderes e limitam a expansão real dos negócios.</p>
-                </div>
-                <div class="seo-card">
-                    <h4>Estrutura vs. Burocracia</h4>
-                    <p>A linha tênue entre organizar fluxos de trabalho de forma leve e engessar a agilidade operacional com excesso de sistemas.</p>
-                </div>
-                <div class="seo-card">
-                    <h4>Legado e Sucessão Pessoal</h4>
-                    <p>Análise de como a maturidade executiva depende da preservação e transferência correta do patrimônio intelectual construído.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. FOOTER E CAPTURA DE LEADS -->
-    <footer id="contato">
-        <div class="container">
-            <div class="footer-grid">
-                
-                <!-- Formulário Tático -->
-                <div class="form-captura">
-                    <h4>Solicitar Alinhamento</h4>
-                    <form action="https://wa.me/5527XXXXXXXXX" method="GET" target="_blank" onsubmit="prepararMensagem(event, this)">
-                        <div class="form-group">
-                            <input type="text" name="nome" placeholder="Seu Nome" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Seu E-mail" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="gargalo" placeholder="Qual seu principal desafio hoje?" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn-primario" style="width: 100%;">Enviar e Iniciar Contato</button>
-                    </form>
-                </div>
-
-                <!-- Coluna Econegócio -->
-                <div class="footer-col">
-                    <h5>Econegócio EU⁺</h5>
-                    <ul class="footer-links">
-                        <li><a href="https://eumaisempresa.github.io/eumaisvida/" target="_blank">EU⁺ Vida</a></li>
-                        <li><a href="https://eumaisempresa.github.io/eumaisnegocio/" target="_blank">EU⁺ Negócio</a></li>
-                        <li><a href="https://eumaisempresa.github.io/eumaisempreendedor/" target="_blank">EU⁺ Empreender</a></li>
-                        <li><a href="https://eumaisempresa.github.io/eumaismissao/" target="_blank">EU⁺ Missão</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna Governança -->
-                <div class="footer-col">
-                    <h5>Governança</h5>
-                    <ul class="footer-links">
-                        <li><a href="#governanca">Constituição</a></li>
-                        <li><a href="#organizacao">Organização</a></li>
-                        <li><a href="#laboratorio">Projetos R&D</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna Corporativo -->
-                <div class="footer-col">
-                    <h5>Corporativo</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Privacidade</a></li>
-                        <li><a href="https://maps.google.com" target="_blank">Perfil no Google</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 Grupo EU⁺. Todos os direitos reservados. Preservação Cognitiva.</p>
-                <p>Serra - ES</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 10. MENU FLUTUANTE EXPANDÍVEL (FAB) -->
-    <div class="fab-container" id="meuFab">
-        <button class="fab-principal" onclick="toggleFab()">⁺</button>
-        <div class="fab-menu-itens">
-            <!-- Botão WhatsApp -->
-            <a href="https://wa.me/5527XXXXXXXXX?text=Olá,%20solicito%20atendimento%20institucional." target="_blank" class="fab-item" title="Fale Conosco">💬</a>
-            <!-- Botão Econegócio -->
-            <a href="./frentes/index.html" class="fab-item" title="Econegócio EU+">🚀</a>
-            <!-- Botão Redes (LinkedIn Exemplo) -->
-            <a href="https://linkedin.com" target="_blank" class="fab-item" title="LinkedIn">🔗</a>
-        </div>
-    </div>
-
-    <!-- SCRIPTS MÍNIMOS OPERACIONAIS -->
-    <script>
-        // Função para abrir/fechar o Menu Flutuante
-        function toggleFab() {
-            const fab = document.getElementById('meuFab');
-            fab.classList.toggle('ativo');
-        }
-
-        // Script tático para juntar os dados do formulário e enviar formatado para o WhatsApp
-        function prepararMensagem(event, form) {
-            event.preventDefault();
-            const nome = form.querySelector('[name="nome"]').value;
-            const email = form.querySelector('[name="email"]').value;
-            const gargalo = form.querySelector('[name="gargalo"]').value;
-            
-            const textoMensagem = `Olá! Realizei o preenchimento no Portal Institucional.%0A%0ANome: ${nome}%0AEmail: ${email}%0ADesafio: ${gargalo}`;
-            const urlWhatsapp = `https://wa.me/5527XXXXXXXXX?text=${textoMensagem}`;
-            
-            window.open(urlWhatsapp, '_blank');
-        }
-    </script>
-</body>
-</html>
+          

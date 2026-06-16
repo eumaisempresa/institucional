@@ -1,8 +1,8 @@
-const BASE = '/Eumais';
+const BASE = '/institucional';
 
 const NAV = [
   { label: 'Início',           href: BASE + '/index.html',             key: 'inicio' },
-  { label: 'Plataformas EU+',  href: BASE + '/frentes/index.html',     key: 'frentes' },
+  { label: 'Plataformas EU+',  href: BASE + '/ecossistemas/index.html',     key: 'ecossistema' },
   { label: 'Institucional',    href: BASE + '/documentos/index.html',  key: 'institucional' },
   { label: 'Organização',      href: BASE + '/organizacao/index.html', key: 'organizacao' },
   { label: 'Governança',       href: BASE + '/governanca/index.html',  key: 'governanca' },
@@ -15,8 +15,8 @@ const CONTACT = {
   nome:     'Bruno Vieira',
   email:    'eumaisempresa@gmail.com',
   phone:    '(27) 99813-1806',
-  linkedin: 'https://www.linkedin.com/in/brunorsantosvieira',
-  drive:    'https://drive.google.com',
+  linkedin: 'https://www.linkedin.com/company/eumaisempresa/?viewAsMember=true',
+  site:    'https://www.eumaisempresa.com.br',
 };
 
 function buildNav(activeKey) {

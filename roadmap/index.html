@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU⁺ · Roadmap</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.rm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start;}
+.rm-col-head{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.rm-col-head .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.rm-col-head h3{font-family:'DM Sans',sans-serif;font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;}
+.dot-done{background:var(--gold);box-shadow:0 0 8px rgba(196,151,74,0.4);}
+.dot-doing{background:#6FBCB8;box-shadow:0 0 8px rgba(111,188,184,0.4);}
+.dot-plan{background:var(--muted);}
+.h3-done{color:var(--gold);}
+.h3-doing{color:#6FBCB8;}
+.h3-plan{color:var(--muted);}
+.rm-item{border:1px solid var(--border2);border-radius:2px;background:var(--bg2);padding:14px 16px;margin-bottom:8px;position:relative;overflow:hidden;}
+.rm-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;}
+.rm-done::before{background:var(--gold);}
+.rm-doing::before{background:#6FBCB8;}
+.rm-plan::before{background:rgba(122,143,163,0.3);}
+.rm-title{font-size:0.86rem;font-weight:500;color:var(--text);margin-bottom:3px;line-height:1.3;}
+.rm-plan .rm-title{color:var(--muted);font-weight:400;}
+.rm-desc{font-size:0.76rem;font-weight:300;color:var(--muted);line-height:1.55;}
+.rm-tag{display:inline-flex;align-items:center;font-size:0.58rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:7px;}
+@media(max-width:900px){.rm-grid{grid-template-columns:1fr;gap:36px;}}
+</style>
+</head>
+<body>
+<nav class="topnav" id="topnav"></nav>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow reveal">Evolução Institucional</p>
+      <h1 class="reveal rd1">Roadmap EU<sup class="plus">+</sup></h1>
+      <p class="reveal rd2">Acompanhe a evolução do ecossistema sem necessidade de acessar documentos internos. O que foi concluído, o que está em desenvolvimento e o que está planejado.</p>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="container">
+      <div class="rm-grid">
+
+        <div class="reveal">
+          <div class="rm-col-head"><div class="dot dot-done"></div><h3 class="h3-done">Concluído</h3></div>
+          <div class="rm-item rm-done"><div class="rm-title">Constituição EU⁺ V2.3</div><div class="rm-desc">Documento constitutivo central. Oficializado e consolidado.</div><div class="rm-tag">Fundacional · Nível 1</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Carta de Identidade V2.3</div><div class="rm-desc">Identidade, propósito, tríade de crenças e hierarquia. Vigente.</div><div class="rm-tag">Fundacional · Nível 1</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Sistema de Governança V1.0</div><div class="rm-desc">Limites da governança, critérios de decisão e papéis institucionais.</div><div class="rm-tag">Governança · Nível 2</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Projeto-Mãe EU⁺ V1.3</div><div class="rm-desc">Matriz estratégica fundamental. Arquitetura de 4 camadas definida.</div><div class="rm-tag">Estratégico · Nível 3</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Plano de Negócios EU⁺ V2.2</div><div class="rm-desc">Modelo de mercado, receita e escala. Versão consolidada.</div><div class="rm-tag">Estratégico · Nível 3</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Frameworks Core EU⁺</div><div class="rm-desc">Gestão Evolutiva™, Estoque Real™, Consultor EU⁺™ e Rotina Guiada™.</div><div class="rm-tag">Patrimônio · Nível 4</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Estrutura Organizacional</div><div class="rm-desc">Board Estratégico, Diretorias, Gerências e Operação definidos.</div><div class="rm-tag">Organização</div></div>
+          <div class="rm-item rm-done"><div class="rm-title">Portal Institucional V1.0</div><div class="rm-desc">8 seções, documentos na íntegra, navegação institucional publicada.</div><div class="rm-tag">Infraestrutura Digital</div></div>
+        </div>
+
+        <div class="reveal rd1">
+          <div class="rm-col-head"><div class="dot dot-doing"></div><h3 class="h3-doing">Em Desenvolvimento</h3></div>
+          <div class="rm-item rm-doing"><div class="rm-title">EU⁺ Vida Profissional — MVP</div><div class="rm-desc">Lista de acesso antecipado aberta. Motor de scoring em desenvolvimento.</div><div class="rm-tag">Frente EU⁺ Vida</div></div>
+          <div class="rm-item rm-doing"><div class="rm-title">Portal V2 — Publicação Estável</div><div class="rm-desc">Correção de caminhos, visual restaurado e contatos no GitHub Pages.</div><div class="rm-tag">Infraestrutura Digital</div></div>
+          <div class="rm-item rm-doing"><div class="rm-title">Gestão de Food — Estruturação</div><div class="rm-desc">Consolidação do diagnóstico inicial como framework replicável.</div><div class="rm-tag">Frente EU⁺ Negócio</div></div>
+          <div class="rm-item rm-doing"><div class="rm-title">Mapa de Inteligências V1</div><div class="rm-desc">Cartografia completa das capacidades e comportamentos dos agentes.</div><div class="rm-tag">Operacional · Nível 5</div></div>
+          <div class="rm-item rm-doing"><div class="rm-title">Memória Viva — Atualização</div><div class="rm-desc">Registro ativo de aprendizados, marcos e histórico de decisões.</div><div class="rm-tag">Operacional · Nível 5</div></div>
+          <div class="rm-item rm-doing"><div class="rm-title">Patrimônio Intelectual V1</div><div class="rm-desc">Registro formal e proteção da produção intelectual do ecossistema.</div><div class="rm-tag">Patrimonial · Nível 4</div></div>
+        </div>
+
+        <div class="reveal rd2">
+          <div class="rm-col-head"><div class="dot dot-plan"></div><h3 class="h3-plan">Planejado</h3></div>
+          <div class="rm-item rm-plan"><div class="rm-title">EU⁺ Negócios</div><div class="rm-desc">Diagnóstico de liderança, sucessão e formação executiva para empresas.</div><div class="rm-tag">Frente EU⁺ Negócio</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">EU⁺ Missão</div><div class="rm-desc">Plataforma de transbordo de propósito em ativos de legado espiritual e social.</div><div class="rm-tag">Frente EU⁺ Missão</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">Integração Central do Conhecimento</div><div class="rm-desc">Sincronização entre o Portal e a Central do Conhecimento EU⁺ no Google Drive.</div><div class="rm-tag">Infraestrutura Digital</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">Agente de Memória Institucional</div><div class="rm-desc">Agente que responde dúvidas institucionais com base no corpus documental oficial.</div><div class="rm-tag">IA · Laboratório</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">TCC e Tese Acadêmica</div><div class="rm-desc">Produção acadêmica formal integrando metodologias e descobertas do ecossistema.</div><div class="rm-tag">Patrimonial · Nível 4</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">Registro Histórico EU⁺</div><div class="rm-desc">Linha do tempo institucional com marcos, decisões e evolução documental.</div><div class="rm-tag">Governança</div></div>
+          <div class="rm-item rm-plan"><div class="rm-title">Portal V3.0</div><div class="rm-desc">Expansão para dezenas de documentos, centenas de ativos e integração com IA.</div><div class="rm-tag">Infraestrutura Digital</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+<footer id="site-footer"></footer>
+<script src="/js/shared.js"></script>
+<script>buildNav('roadmap'); buildFooter();</script>
+</body>
+</html>

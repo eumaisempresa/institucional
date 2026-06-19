@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU⁺ · Plataformas</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+.frente{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.frente.flip{direction:rtl}
+.frente.flip>*{direction:ltr}
+.fv{position:relative;display:flex;align-items:center;justify-content:center;padding:80px 60px;overflow:hidden}
+.fv-bg-n{position:absolute;font-family:'Cormorant Garamond',serif;font-size:clamp(180px,28vw,360px);font-weight:600;opacity:0.05;line-height:1;user-select:none;pointer-events:none;right:-30px;bottom:-30px;letter-spacing:-0.04em}
+.fv-inner{position:relative;z-index:1;text-align:center}
+.fv-marca{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,90px);font-weight:300;line-height:1;letter-spacing:-0.01em;margin-bottom:14px;display:inline-flex;align-items:flex-start}
+.fv-marca sup{font-size:0.36em;vertical-align:super;font-weight:400;margin-top:0.08em}
+.fv-nome{font-size:10px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;opacity:0.45}
+.fc{padding:80px 70px 80px 60px;display:flex;flex-direction:column;justify-content:center}
+.frente.flip .fc{padding:80px 60px 80px 70px}
+.flabel{font-size:10px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.flabel::before{content:'';width:26px;height:1px;background:currentColor;opacity:0.8}
+.ftitle{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.2vw,46px);font-weight:300;line-height:1.12;margin-bottom:18px}
+.ftitle em{font-style:italic}
+.fbody{font-size:15px;font-weight:300;line-height:1.75;opacity:0.82;margin-bottom:28px;max-width:400px}
+.fpub{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:38px}
+.fpub li{font-size:13px;font-weight:400;opacity:0.88;display:flex;align-items:center;gap:12px}
+.fpub li::before{content:'';width:14px;height:1px;flex-shrink:0}
+.fctas{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-main{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:14px 32px;text-decoration:none;border:1px solid currentColor;transition:all 0.25s;font-family:'DM Sans',sans-serif;background:transparent}
+.btn-ghost{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;opacity:0.7;padding-bottom:2px;border-bottom:1px solid transparent;transition:opacity 0.2s,border-color 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;cursor:pointer}
+.btn-ghost:hover{opacity:1;border-bottom-color:currentColor}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:6px 14px;border:1px solid currentColor;margin-bottom:28px;width:fit-content;opacity:0.9}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+
+/* NEGÓCIO */
+#negocio{background:#161616}
+#negocio .fv{background:rgba(196,162,101,0.04);border-right:1px solid rgba(196,162,101,0.12)}
+#negocio .fv-marca,#negocio .fv-bg-n{color:#C4A265}
+#negocio .flabel,#negocio .badge{color:#C4A265}
+#negocio .ftitle{color:#F5F2EC}
+#negocio .ftitle em{color:#C4A265}
+#negocio .fbody,#negocio .fpub li{color:#F5F2EC}
+#negocio .fpub li::before{background:#C4A265}
+#negocio .btn-main{color:#161616;background:#C4A265;border-color:#C4A265}
+#negocio .btn-main:hover{background:transparent;color:#C4A265}
+#negocio .btn-ghost{color:#F5F2EC}
+
+/* EMPREENDER */
+#empreender{background:#1E1206}
+#empreender .fv{background:rgba(232,114,12,0.05);border-left:1px solid rgba(232,114,12,0.12)}
+#empreender .fv-marca,#empreender .fv-bg-n{color:#E8720C}
+#empreender .flabel{color:#E8720C}
+#empreender .ftitle{color:#FFF8F0}
+#empreender .ftitle em{color:#E8720C}
+#empreender .fbody,#empreender .fpub li{color:#FFF8F0}
+#empreender .fpub li::before{background:#E8720C}
+#empreender .btn-main{color:#1E1206;background:#E8720C;border-color:#E8720C}
+#empreender .btn-main:hover{background:transparent;color:#E8720C}
+#empreender .btn-ghost{color:#FFF8F0}
+
+/* MISSÃO */
+#missao{background:#0E1A0E}
+#missao .fv{background:rgba(122,173,102,0.05);border-right:1px solid rgba(122,173,102,0.12)}
+#missao .fv-marca,#missao .fv-bg-n{color:#7AAD66}
+#missao .flabel{color:#7AAD66}
+#missao .ftitle{color:#F0F5EE}
+#missao .ftitle em{color:#7AAD66}
+#missao .fbody,#missao .fpub li{color:#F0F5EE}
+#missao .fpub li::before{background:#7AAD66}
+#missao .btn-main{color:#0E1A0E;background:#7AAD66;border-color:#7AAD66}
+#missao .btn-main:hover{background:transparent;color:#7AAD66}
+#missao .btn-ghost{color:#F0F5EE}
+
+/* VIDA */
+#vida{background:#071220}
+#vida .fv{background:rgba(74,155,196,0.05);border-left:1px solid rgba(74,155,196,0.12)}
+#vida .fv-marca,#vida .fv-bg-n{color:#4A9BC4}
+#vida .flabel{color:#4A9BC4}
+#vida .ftitle{color:#EEF6FB}
+#vida .ftitle em{color:#4A9BC4}
+#vida .fbody,#vida .fpub li{color:#EEF6FB}
+#vida .fpub li::before{background:#4A9BC4}
+#vida .btn-main{color:#071220;background:#4A9BC4;border-color:#4A9BC4}
+#vida .btn-main:hover{background:transparent;color:#4A9BC4}
+#vida .btn-ghost{color:#EEF6FB}
+
+/* HERO */
+.plat-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 60px 80px;position:relative;text-align:center;overflow:hidden;background:#0D0D0D}
+.plat-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 25% 50%,rgba(196,162,101,0.07) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 75% 50%,rgba(74,155,196,0.05) 0%,transparent 70%);pointer-events:none}
+.plat-hero-bg{position:absolute;font-family:'Cormorant Garamond',serif;font-size:clamp(160px,26vw,360px);font-weight:600;color:rgba(255,255,255,0.022);line-height:1;user-select:none;pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap}
+.plat-hero-eye{font-size:10px;font-weight:500;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:28px}
+.plat-hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,140px);font-weight:300;line-height:1;color:white;margin-bottom:6px;letter-spacing:-0.02em}
+.plat-hero-title sup{font-size:0.3em;color:#B8975A;vertical-align:super;font-weight:400}
+.plat-hero-tag{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,2vw,22px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.35);margin-bottom:48px}
+.hero-pills{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
+.pill{font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:10px 22px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.28);text-decoration:none;transition:all 0.3s}
+.pill.e{border-color:rgba(196,162,101,0.35);color:rgba(196,162,101,0.75)}
+.pill.m{border-color:rgba(232,114,12,0.35);color:rgba(232,114,12,0.75)}
+.pill.s{border-color:rgba(122,173,102,0.35);color:rgba(122,173,102,0.75)}
+.pill.v{border-color:rgba(74,155,196,0.35);color:rgba(74,155,196,0.75)}
+.pill:hover{filter:brightness(1.3);transform:translateY(-1px)}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(14px);z-index:500;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.mbox{background:#0f0f0f;border:1px solid rgba(255,255,255,0.07);padding:52px 48px;width:100%;max-width:460px;position:relative;animation:mIn 0.28s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.mclose{position:absolute;top:16px;right:20px;font-size:20px;color:rgba(255,255,255,0.2);cursor:pointer;background:none;border:none;transition:color 0.2s}
+.mclose:hover{color:white}
+.mey{font-size:10px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;margin-bottom:16px}
+.mbox h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:white;margin-bottom:6px}
+.msub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.3);margin-bottom:28px;line-height:1.55}
+.mf{margin-bottom:15px}
+.mf label{display:block;font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:7px}
+.mf input,.mf select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:white;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s}
+.mf input::placeholder{color:rgba(255,255,255,0.14)}
+.mf select{appearance:none;cursor:pointer}
+.mf select option{background:#111}
+.mbtn{width:100%;padding:14px;border:none;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;margin-top:6px;transition:opacity 0.2s}
+.mbtn:hover{opacity:0.85}
+.msuccess{display:none;text-align:center;padding:16px 0}
+.msuccess h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:white;margin-bottom:10px}
+.msuccess p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.32);line-height:1.6}
+
+.fu{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+/* FOOTER PLATAFORMAS */
+.plat-footer{background:#060606;padding:48px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.04);flex-wrap:wrap;gap:20px}
+.pf-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:rgba(255,255,255,0.28);text-decoration:none}
+.pf-logo sup{font-size:0.42em;color:#B8975A;vertical-align:super;font-weight:400}
+.pf-links{display:flex;gap:28px;list-style:none;flex-wrap:wrap}
+.pf-links a{font-size:10px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.18);text-decoration:none;transition:color 0.2s}
+.pf-links a:hover{color:rgba(255,255,255,0.45)}
+
+@media(max-width:900px){
+  .plat-hero{padding:100px 24px 60px}
+  .frente{grid-template-columns:1fr;min-height:auto}
+  .frente.flip{direction:ltr}
+  .fv{padding:52px 24px;min-height:180px}
+  .fc{padding:48px 24px}
+  .frente.flip .fc{padding:48px 24px}
+  .plat-footer{padding:36px 24px;flex-direction:column;align-items:flex-start}
+  .mbox{padding:36px 24px}
+}
+@media(max-width:480px){
+  .hero-pills{flex-direction:column;align-items:center}
+  .fctas{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV SIMPLES SEM shared.js para esta página especial -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(13,13,13,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06)">
+  <a href="/" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:white;text-decoration:none;letter-spacing:0.04em">EU<sup style="font-size:0.42em;color:#B8975A;vertical-align:super;font-weight:400">+</sup></a>
+  <div style="display:flex;gap:6px">
+    <a href="#negocio" style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(196,162,101,0.3);color:rgba(196,162,101,0.7);text-decoration:none">Negócio</a>
+    <a href="#empreender" style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(232,114,12,0.3);color:rgba(232,114,12,0.7);text-decoration:none">Empreender</a>
+    <a href="#missao" style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(122,173,102,0.3);color:rgba(122,173,102,0.7);text-decoration:none">Missão</a>
+    <a href="#vida" style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(74,155,196,0.3);color:rgba(74,155,196,0.7);text-decoration:none">Vida</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="plat-hero">
+  <div class="plat-hero-bg">EU<sup>+</sup></div>
+  <div class="plat-hero-eye fu">Soluções que elevam</div>
+  <div class="plat-hero-title fu" style="transition-delay:.1s">EU<sup>+</sup></div>
+  <p class="plat-hero-tag fu" style="transition-delay:.2s">Para o negócio, para o empreendedor, para a missão, para a vida.</p>
+  <div class="hero-pills fu" style="transition-delay:.3s">
+    <a class="pill e" href="#negocio">EU⁺ Negócio</a>
+    <a class="pill m" href="#empreender">EU⁺ Empreender</a>
+    <a class="pill s" href="#missao">EU⁺ Missão</a>
+    <a class="pill v" href="#vida">EU⁺ Vida</a>
+  </div>
+</section>
+
+<!-- EU⁺ NEGÓCIO -->
+<section class="frente" id="negocio">
+  <div class="fv"><div class="fv-bg-n">01</div><div class="fv-inner fu"><div class="fv-marca">EU<sup>+</sup></div><div class="fv-nome">Negócio</div></div></div>
+  <div class="fc">
+    <div class="badge fu">Disponível agora</div>
+    <div class="flabel fu" style="transition-delay:.05s">Gestão Comercial B2B</div>
+    <h2 class="ftitle fu" style="transition-delay:.1s">A estrutura que grandes empresas têm.<br><em>Para o negócio que você construiu.</em></h2>
+    <p class="fbody fu" style="transition-delay:.14s">Painel de inteligência comercial que transforma relatórios do seu ERP em decisões. Carteira, representantes, categorias e alertas — em minutos, sem TI, sem planilha.</p>
+    <ul class="fpub fu" style="transition-delay:.18s">
+      <li>Empresários e donos de operação</li>
+      <li>Gerentes comerciais e de atacado</li>
+      <li>Redes de varejo e distribuidoras</li>
+      <li>Times de televendas e B2B</li>
+    </ul>
+    <div class="fctas fu" style="transition-delay:.22s">
+      <a class="btn-main" href="https://eumaisempresa.github.io/eumaisnegocio/" target="_blank">Acessar EU⁺ Negócio</a>
+      <button class="btn-ghost" onclick="openM('negocio')">Falar com a equipe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EU⁺ EMPREENDER -->
+<section class="frente flip" id="empreender">
+  <div class="fv"><div class="fv-bg-n">02</div><div class="fv-inner fu"><div class="fv-marca">EU<sup>+</sup></div><div class="fv-nome">Empreender</div></div></div>
+  <div class="fc">
+    <div class="flabel fu" style="transition-delay:.05s">Gestão Simplificada</div>
+    <h2 class="ftitle fu" style="transition-delay:.1s">Gestão do jeito que você vive.<br><em>Simples, rápido, no celular.</em></h2>
+    <p class="fbody fu" style="transition-delay:.14s">Para quem está com a mão na massa. Controle do que entra e sai, lista de compras inteligente, lembrete de voz. Sem planilha, sem contador, sem complicação.</p>
+    <ul class="fpub fu" style="transition-delay:.18s">
+      <li>Vendedores e representantes autônomos</li>
+      <li>Empreendedores de pequeno negócio</li>
+      <li>Produtores, artesãos e autônomos</li>
+      <li>Profissionais liberais e freelancers</li>
+    </ul>
+    <div class="fctas fu" style="transition-delay:.22s">
+      <a class="btn-main" href="https://eumaisempresa.github.io/eumaisempreendedor/" target="_blank">Acessar EU⁺ Empreender</a>
+      <button class="btn-ghost" onclick="openM('empreender')">Falar com a equipe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EU⁺ MISSÃO -->
+<section class="frente" id="missao">
+  <div class="fv"><div class="fv-bg-n">03</div><div class="fv-inner fu"><div class="fv-marca">EU<sup>+</sup></div><div class="fv-nome">Missão</div></div></div>
+  <div class="fc">
+    <div class="flabel fu" style="transition-delay:.05s">Gestão de Propósito</div>
+    <h2 class="ftitle fu" style="transition-delay:.1s">Tecnologia a serviço<br>de quem <em>serve.</em></h2>
+    <p class="fbody fu" style="transition-delay:.14s">Gerencie sua missão, não sua burocracia. Alcance de vidas, gestão de dons, transparência financeira e projetos de expansão — tudo voltado para pessoas, não para números.</p>
+    <ul class="fpub fu" style="transition-delay:.18s">
+      <li>Líderes religiosos e pastores</li>
+      <li>Coordenadores de comunidades</li>
+      <li>Organizações sociais e sem fins lucrativos</li>
+      <li>Ministérios e grupos de expansão</li>
+    </ul>
+    <div class="fctas fu" style="transition-delay:.22s">
+      <a class="btn-main" href="https://eumaisempresa.github.io/eumaismissao/" target="_blank">Acessar EU⁺ Missão</a>
+      <button class="btn-ghost" onclick="openM('missao')">Falar com a equipe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EU⁺ VIDA -->
+<section class="frente flip" id="vida">
+  <div class="fv"><div class="fv-bg-n">04</div><div class="fv-inner fu"><div class="fv-marca">EU<sup>+</sup></div><div class="fv-nome">Vida</div></div></div>
+  <div class="fc">
+    <div class="flabel fu" style="transition-delay:.05s">Desenvolvimento Humano</div>
+    <h2 class="ftitle fu" style="transition-delay:.1s">Você no comando<br>da sua <em>própria vida.</em></h2>
+    <p class="fbody fu" style="transition-delay:.14s">Diagnóstico honesto de maturidade executiva, PDI vivo e acompanhamento contínuo. Para quem quer crescer com estrutura, não com sorte.</p>
+    <ul class="fpub fu" style="transition-delay:.18s">
+      <li>Profissionais em transição de carreira</li>
+      <li>Gestores em busca de evolução executiva</li>
+      <li>Líderes que querem deixar legado</li>
+      <li>Pessoas que querem autonomia integral</li>
+    </ul>
+    <div class="fctas fu" style="transition-delay:.22s">
+      <a class="btn-main" href="https://eumaisempresa.github.io/eumaisvida/" target="_blank">Acessar EU⁺ Vida</a>
+      <button class="btn-ghost" onclick="openM('vida')">Falar com a equipe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="plat-footer">
+  <a href="/" class="pf-logo">EU<sup>+</sup></a>
+  <ul class="pf-links">
+    <li><a href="#negocio">Negócio</a></li>
+    <li><a href="#empreender">Empreender</a></li>
+    <li><a href="#missao">Missão</a></li>
+    <li><a href="#vida">Vida</a></li>
+    <li><a href="/">Portal Institucional</a></li>
+    <li><a href="mailto:eumaisempresa@gmail.com">Contato</a></li>
+  </ul>
+  <p style="font-size:11px;color:rgba(255,255,255,0.1)">© 2026 Grupo EU⁺</p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeIfOut(event)">
+  <div class="mbox" id="mbox">
+    <button class="mclose" onclick="closeM()">×</button>
+    <div id="mform">
+      <div class="mey" id="mey">EU⁺</div>
+      <h3>Fale com a equipe</h3>
+      <p class="msub">Deixe seu contato e retornamos em breve.</p>
+      <div class="mf"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div>
+      <div class="mf"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+      <div class="mf"><label>Telefone</label><input type="tel" placeholder="(00) 00000-0000"></div>
+      <div class="mf"><label>Interesse</label>
+        <select><option value="" disabled selected>Selecione a plataforma</option>
+          <option>EU⁺ Negócio</option><option>EU⁺ Empreender</option>
+          <option>EU⁺ Missão</option><option>EU⁺ Vida</option>
+        </select>
+      </div>
+      <button class="mbtn" id="mbtn" onclick="submitM()">Enviar mensagem</button>
+    </div>
+    <div class="msuccess" id="msuccess">
+      <div style="font-size:44px;margin-bottom:16px">✦</div>
+      <h3>Mensagem recebida.</h3>
+      <p>Entraremos em contato em breve.<br>Obrigado pelo interesse no EU⁺.</p>
+    </div>
+  </div>
+</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script>
+const CORES={negocio:{ey:'EU⁺ Negócio',cor:'#C4A265',bg:'#161616'},empreender:{ey:'EU⁺ Empreender',cor:'#E8720C',bg:'#1E1206'},missao:{ey:'EU⁺ Missão',cor:'#7AAD66',bg:'#0E1A0E'},vid

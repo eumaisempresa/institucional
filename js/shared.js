@@ -1,24 +1,26 @@
-const BASE = '/institucional';
+// ── BASE PATH ── (domínio próprio ativo — raiz limpa)
+const BASE = '';
 
+// ── NAV ITEMS ──
 const NAV = [
-  { label: 'Início',           href: BASE + '/index.html',             key: 'inicio' },
-  { label: 'Plataformas EU+',  href: BASE + '/ecossistemas/index.html',     key: 'ecossistema' },
-  { label: 'Institucional',    href: BASE + '/documentos/index.html',  key: 'institucional' },
-  { label: 'Organização',      href: BASE + '/organizacao/index.html', key: 'organizacao' },
-  { label: 'Governança',       href: BASE + '/governanca/index.html',  key: 'governanca' },
-  { label: 'Frameworks',       href: BASE + '/frameworks/index.html',  key: 'frameworks' },
-  { label: 'Laboratório',      href: BASE + '/laboratorio/index.html', key: 'laboratorio' },
-  { label: 'Roadmap',          href: BASE + '/roadmap/index.html',     key: 'roadmap' },
+  { label: 'Início',        href: BASE + '/',                    key: 'inicio' },
+  { label: 'Plataformas',   href: BASE + '/plataformas/',        key: 'plataformas' },
+  { label: 'Institucional', href: BASE + '/documentos/',         key: 'institucional' },
+  { label: 'Organização',   href: BASE + '/organizacao/',        key: 'organizacao' },
+  { label: 'Governança',    href: BASE + '/governanca/',         key: 'governanca' },
+  { label: 'Artigos',       href: BASE + '/artigos/',            key: 'artigos' },
+  { label: 'Laboratório',   href: BASE + '/laboratorio/',        key: 'laboratorio' },
+  { label: 'Roadmap',       href: BASE + '/roadmap/',            key: 'roadmap' },
 ];
 
 const CONTACT = {
   nome:     'Bruno Vieira',
   email:    'eumaisempresa@gmail.com',
   phone:    '(27) 99813-1806',
-  linkedin: 'https://www.linkedin.com/company/eumaisempresa/?viewAsMember=true',
-  site:    'https://www.eumaisempresa.com.br',
+  linkedin: 'https://www.linkedin.com/in/brunorsantosvieira',
 };
 
+// ── BUILD NAV ──
 function buildNav(activeKey) {
   const links = NAV.map(item =>
     `<li><a href="${item.href}" class="${item.key === activeKey ? 'active' : ''}">${item.label}</a></li>`
@@ -26,7 +28,7 @@ function buildNav(activeKey) {
 
   document.getElementById('topnav').innerHTML = `
     <div class="container">
-      <a href="${BASE}/index.html" class="nav-logo">EU<sup class="plus">+</sup></a>
+      <a href="${BASE}/" class="nav-logo">EU<sup class="plus">+</sup></a>
       <ul class="nav-links" id="nav-links">${links}</ul>
       <div class="nav-cta">
         <a href="mailto:${CONTACT.email}">
@@ -49,6 +51,7 @@ function buildNav(activeKey) {
   });
 }
 
+// ── BUILD FOOTER ──
 function buildFooter() {
   const navLinks = NAV.map(item =>
     `<a href="${item.href}">${item.label}</a>`
@@ -57,17 +60,21 @@ function buildFooter() {
   document.getElementById('site-footer').innerHTML = `
     <div class="container">
       <div class="footer-grid">
+
         <div class="footer-brand">
-          <a href="${BASE}/index.html" class="footer-brand-name">EU<sup class="plus">+</sup></a>
+          <a href="${BASE}/" class="footer-brand-name">EU<sup class="plus">+</sup></a>
           <p>Ecossistema de inteligência aplicada. Removendo barreiras da complexidade técnica e da sobrecarga operacional através de uma arquitetura de inteligência acessível e resiliente.</p>
           <span class="footer-tagline">Agentes livres. Conhecimento preservado.</span>
         </div>
+
         <div class="footer-nav">
           <div class="footer-nav-title">Portal</div>
           <div class="footer-nav-links">${navLinks}</div>
         </div>
+
         <div class="footer-contact">
           <div class="footer-contact-title">Presidência</div>
+
           <a href="mailto:${CONTACT.email}" class="footer-contact-item">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <rect x="1.5" y="3" width="11" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/>
@@ -75,12 +82,14 @@ function buildFooter() {
             </svg>
             <span>${CONTACT.email}</span>
           </a>
+
           <a href="tel:+5527998131806" class="footer-contact-item">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 2.5h3l1 2.5-1.5 1.5a7 7 0 002.5 2.5L9 7.5l2.5 1v3a1 1 0 01-1 1A10 10 0 011.5 3.5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>${CONTACT.phone}</span>
           </a>
+
           <a href="${CONTACT.linkedin}" target="_blank" rel="noopener" class="footer-contact-item">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <rect x="1.5" y="1.5" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/>
@@ -88,15 +97,18 @@ function buildFooter() {
             </svg>
             <span>${CONTACT.nome} · LinkedIn</span>
           </a>
+
         </div>
       </div>
+
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Grupo EU⁺ · Documentos sob versionamento controlado · Acesso público</p>
+        <p class="footer-copy">© 2026 Grupo EU⁺ · www.eumaisempresa.com.br · Todos os direitos reservados</p>
         <p class="footer-purpose">Autonomia integral. Patrimônio permanente.</p>
       </div>
     </div>`;
 }
 
+// ── DOC TOGGLE ──
 function toggleDoc(btn) {
   const content = btn.nextElementSibling;
   const isOpen  = btn.classList.contains('open');
@@ -113,6 +125,7 @@ function toggleDoc(btn) {
   }
 }
 
+// ── SCROLL REVEAL ──
 function initReveal() {
   const els = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {

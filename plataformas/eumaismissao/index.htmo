@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EU+ Missão. Tecnologia a serviço de quem serve. Uma plataforma institucional com ferramentas reais para organização, impacto e transformação." />
+  <title>EU+ Missão | Tecnologia a serviço de quem serve</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#0E1A0E;
+      --bg2:#142014;
+      --bg3:#1A2A1A;
+      --bg4:#203020;
+      --green:#7AAD66;
+      --green2:#A8CC94;
+      --text:#F0F5EE;
+      --muted:#8AAE80;
+      --border:rgba(122,173,102,0.18);
+      --border2:rgba(122,173,102,0.08);
+      --card:rgba(20,32,20,0.88);
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3{ font-family:'Cormorant Garamond',serif; line-height:1.12; }
+    .container{ max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+    a{ color:inherit; text-decoration:none; }
+
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:100;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 40px;
+      background:rgba(14,26,14,0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.3rem;
+      font-weight:600;
+      color:var(--text);
+      display:flex;
+      align-items:flex-start;
+      gap:4px;
+      letter-spacing:.02em;
+    }
+    .nav-logo .frente{ color:var(--green); }
+    .nav-back{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-size:.75rem;
+      font-weight:400;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:7px 16px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .nav-back:hover{ color:var(--green); border-color:rgba(122,173,102,0.4); }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:62px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:-100px; right:-200px;
+      width:700px; height:700px;
+      background:radial-gradient(circle, rgba(122,173,102,0.18) 0, transparent 60%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      left:0; top:15%; bottom:15%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent, rgba(122,173,102,0.3), transparent);
+    }
+    .hero-accent{
+      position:absolute;
+      right:0; top:0; bottom:0;
+      width:5px;
+      background:linear-gradient(to bottom, transparent, var(--green), transparent);
+      opacity:.6;
+    }
+    .hero-inner{ max-width:760px; padding:80px 0; }
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:.7rem;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--green);
+      margin-bottom:28px;
+    }
+    .hero-eyebrow::before{
+      content:'';
+      width:28px;
+      height:1px;
+      background:var(--green);
+      display:block;
+    }
+    .hero h1{
+      font-size:clamp(2.8rem, 7vw, 5.5rem);
+      font-weight:300;
+      margin-bottom:24px;
+    }
+    .hero h1 em{ font-style:italic; color:var(--green); }
+    .hero-sub{
+      font-size:clamp(1rem, 2vw, 1.15rem);
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.78;
+      max-width:600px;
+      margin-bottom:30px;
+    }
+    .hero-note{
+      font-size:.88rem;
+      color:#c6d9c0;
+      max-width:620px;
+      margin-bottom:42px;
+      border-left:2px solid rgba(122,173,102,0.35);
+      padding-left:14px;
+    }
+    .hero-ctas{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn-primary,.btn-outline{
+      display:inline-block;
+      font-size:.82rem;
+      font-weight:500;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:14px 28px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .btn-primary{
+      color:var(--bg);
+      background:var(--green);
+      border:1px solid var(--green);
+    }
+    .btn-primary:hover{ background:var(--green2); border-color:var(--green2); transform:translateY(-1px); }
+    .btn-outline{
+      color:var(--text);
+      border:1px solid rgba(240,245,238,0.2);
+    }
+    .btn-outline:hover{ border-color:var(--green); color:var(--green); }
+
+    .hero-stats{
+      display:flex;
+      gap:40px;
+      flex-wrap:wrap;
+      margin-top:56px;
+      padding-top:40px;
+      border-top:1px solid var(--border2);
+    }
+    .hero-stat-n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.1rem;
+      color:var(--green);
+      line-height:1;
+      margin-bottom:4px;
+    }
+    .hero-stat-l{
+      font-size:.75rem;
+      font-weight:300;
+      color:var(--muted);
+      max-width:170px;
+    }
+
+    .sec{ padding:80px 0; position:relative; z-index:1; }
+    .sec + .sec{ border-top:1px solid var(--border2); }
+    .sec-label{
+      font-size:.68rem;
+      font-weight:500;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--green);
+      margin-bottom:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sec-label::before{
+      content:'';
+      width:20px;
+      height:1px;
+      background:var(--green);
+      display:block;
+    }
+    .sec h2{
+      font-size:clamp(1.8rem, 4vw, 2.8rem);
+      font-weight:400;
+      margin-bottom:14px;
+    }
+    .sec h2 em{ color:var(--green); font-style:italic; }
+    .sec-sub{
+      font-size:.93rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.75;
+      max-width:620px;
+      margin-bottom:42px;
+    }
+
+    .highlight-box{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:3px;
+      padding:34px 28px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 18px 40px rgba(0,0,0,.14);
+    }
+    .highlight-box::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, transparent, var(--green), transparent);
+    }
+    .highlight-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .tool-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.62rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--green);
+      background:rgba(122,173,102,0.08);
+      border:1px solid rgba(122,173,102,0.22);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .highlight-box h3{
+      font-size:1.8rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .highlight-box p{
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.75;
+      max-width:760px;
+    }
+    .highlight-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .card{
+      background:var(--bg2);
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:28px 22px;
+      position:relative;
+      overflow:hidden;
+      transition:.25s;
+    }
+    .card:hover{ border-color:rgba(122,173,102,0.35); transform:translateY(-2px); }
+    .card .n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:3rem;
+      font-style:italic;
+      color:rgba(122,173,102,0.12);
+      line-height:1;
+      margin-bottom:16px;
+      display:block;
+    }
+    .card h3{
+      font-size:1.15rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .card p{
+      font-size:.86rem;
+      color:var(--muted);
+      line-height:1.72;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .sol-card{
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:24px 22px;
+      background:var(--bg2);
+      transition:.25s;
+    }
+    .sol-card:hover{ border-color:rgba(122,173,102,0.3); background:var(--bg3); }
+    .sol-tag{
+      font-size:.6rem;
+      font-weight:500;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--green);
+      margin-bottom:6px;
+    }
+    .sol-card h3{
+      font-size:1.05rem;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .sol-card p{
+      font-size:.8rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .sol-status{
+      display:inline-block;
+      margin-top:10px;
+      font-size:.6rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:2px 8px;
+      border-radius:2px;
+      color:var(--green);
+      background:rgba(122,173,102,0.1);
+      border:1px solid rgba(122,173,102,0.22);
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      padding:36px 0 28px;
+      background:var(--bg2);
+      position:relative;
+      z-index:1;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .footer-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.05rem;
+      color:var(--text);
+    }
+    .footer-logo span{ color:var(--green); }
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      font-size:.78rem;
+      font-weight:300;
+      color:var(--muted);
+    }
+    .footer-links a:hover{ color:var(--green); }
+    .footer-bottom{
+      border-top:1px solid var(--border2);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .footer-copy{ font-size:.68rem; color:rgba(138,174,128,0.45); }
+    .footer-tag{
+      font-family:'Cormorant Garamond',serif;
+      font-size:.85rem;
+      font-style:italic;
+      color:rgba(122,173,102,0.4);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible{ opacity:1; transform:translateY(0); }
+
+    @media (max-width:900px){
+      nav{ padding:16px 20px; }
+      .grid-3,.grid-2{ grid-template-columns:1fr; }
+      .hero-stats{ gap:22px; }
+      .highlight-head{ flex-direction:column; }
+      .footer-inner,.footer-bottom{ flex-direction:column; align-items:flex-start; }
+      .hero{ padding-top:72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#top" class="nav-logo">EU<sup>+</sup> <span class="frente">Missão</span></a>
+    <a href="#contato" class="nav-back">
+      <span>Falar agora</span>
+    </a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-accent"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-eyebrow reveal">EU+ MISSÃO</div>
+          <h1 class="reveal">Tecnologia a serviço de <em>quem serve</em>.</h1>
+          <p class="hero-sub reveal">
+            Uma base institucional pensada para conectar propósito, organização e ferramentas reais que apoiam transformação, gestão e impacto.
+          </p>
+          <p class="hero-note reveal">
+            Você já pode falar conosco agora para adquirir a ferramenta em destaque e receber o direcionamento certo. As páginas específicas de cada solução serão apresentadas separadamente, conforme o ecossistema evolui.
+          </p>
+          <div class="hero-ctas reveal">
+            <a href="https://wa.me/5527998131806" class="btn-primary" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a href="mailto:eumaisempresa@gmail.com" class="btn-outline">Enviar e-mail</a>
+          </div>
+          <div class="hero-stats reveal">
+            <div>
+              <div class="hero-stat-n">01</div>
+              <div class="hero-stat-l">Ferramenta real em destaque no momento</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">+E</div>
+              <div class="hero-stat-l">Estrutura pronta para múltiplas soluções futuras</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">CTA</div>
+              <div class="hero-stat-l">Contato direto para conversão imediata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="ferramenta">
+      <div class="container">
+        <div class="sec-label reveal">Ferramenta em destaque</div>
+        <h2 class="reveal">Colabora AI +, a solução real que já está em uso.</h2>
+        <p class="sec-sub reveal">
+          Esta página apresenta a ferramenta de forma institucional e objetiva, sem entrar em excesso de detalhes, para não limitar o futuro ecossistema de soluções.
+        </p>
+
+        <div class="highlight-box reveal">
+          <div class="highlight-head">
+            <div>
+              <div class="tool-pill">Disponível agora</div>
+              <h3>Colabora AI +</h3>
+              <p>
+                Uma ferramenta já ativa, destacada aqui como porta de entrada para contato e aquisição. A apresentação completa, com uso, valores, imagens e depoimentos, ficará na página própria de cada solução.
+              </p>
+            </div>
+          </div>
+          <div class="highlight-actions">
+            <a class="btn-primary" href="https://wa.me/5527998131806" target="_blank" rel="noopener">Adquirir via WhatsApp</a>
+            <a class="btn-outline" href="mailto:eumaisempresa@gmail.com">Solicitar por e-mail</a>
+            <a class="btn-outline" href="https://eumaisempresa.github.io/eumaismissao/colaboraaimais" target="_blank" rel="noopener">Abrir página da ferramenta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="institucional">
+      <div class="container">
+        <div class="sec-label reveal">Base institucional</div>
+        <h2 class="reveal">O Eu Mais Missão continua sendo a <em>estrutura central</em>.</h2>
+        <p class="sec-sub reveal">
+          A página segue apresentando a marca, a visão e o posicionamento institucional, porque isso sustenta credibilidade e permite que o ecossistema cresça com novas ferramentas.
+        </p>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <span class="n">01</span>
+            <h3>Propósito</h3>
+            <p>Comunicar com clareza a missão do ecossistema e sua atuação em transformação, organização e impacto.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">02</span>
+            <h3>Confiança</h3>
+            <p>Manter a base institucional para gerar segurança, autoridade e continuidade no relacionamento com o visitante.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">03</span>
+            <h3>Expansão</h3>
+            <p>Preparar a página para receber outras ferramentas sem perder a identidade visual nem a lógica de navegação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="catalogo">
+      <div class="container">
+        <div class="sec-label reveal">Catálogo em expansão</div>
+        <h2 class="reveal">Outras soluções serão incluídas <em>sem sobrecarregar</em> esta página.</h2>
+        <p class="sec-sub reveal">
+          As demais ferramentas ficam organizadas como futuros pontos de entrada do ecossistema, sem necessidade de detalhamento agora.
+        </p>
+
+        <div class="grid-2">
+          <div class="sol-card reveal">
+            <div class="sol-tag">Estrutura</div>
+            <h3>Plataforma institucional</h3>
+            <p>Apresenta o ecossistema, organiza o primeiro contato e encaminha para a solução correta.</p>
+            <span class="sol-status">Ativa</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Conversão</div>
+            <h3>Contato direto</h3>
+            <p>WhatsApp e e-mail ficam como meios prioritários para gerar resposta rápida e reduzir atrito.</p>
+            <span class="sol-status">Ativa</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Futuro</div>
+            <h3>Páginas individuais</h3>
+            <p>Cada ferramenta terá seu próprio endereço com conteúdo completo, imagens, valor e prova social.</p>
+            <span class="sol-status">Em expansão</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Escala</div>
+            <h3>Ecossistema de soluções</h3>
+            <p>A página atual funciona como base para múltiplas ferramentas, sem travar o crescimento posterior.</p>
+            <span class="sol-status">Planejado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contato">
+      <div class="container">
+        <div class="highlight-box reveal">
+          <div class="sec-label" style="margin-bottom:18px;">Contato imediato</div>
+          <h2 style="margin-bottom:16px;">Fale conosco e <em>adquira agora</em>.</h2>
+          <p class="sec-sub" style="margin-bottom:22px; max-width:700px;">
+            A página já está pronta para receber visitantes reais e direcioná-los para conversa direta. O objetivo aqui é conversão rápida, sem perder o caráter institucional.
+          </p>
+          <div class="highlight-actions">
+            <a href="https://wa.me/5527998131806" class="btn-primary" target="_blank" rel="noopener">WhatsApp: (27) 99813-1806</a>
+            <a href="mailto:eumaisempresa@gmail.com" class="btn-outline">eumaisempresa@gmail.com</a>
+            <a href="https://www.linkedin.com/company/eumaisempresa/" class="btn-outline" target="_blank" rel="noopener">LinkedIn @eumaisempresa</a>
+            <a href="https://www.instagram.com/eumaismissao/" class="btn-outline" target="_blank" rel="noopener">Instagram @eumaismissao</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#top" class="footer-logo">EU<sup>+</sup> <span>Missão</span></a>
+        <div class="footer-links">
+          <a href="#ferramenta">Ferramenta em destaque</a>
+          <a href="#institucional">Institucional</a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 EU+ Missão. Parte do ecossistema Eu Mais Empresa.</p>
+        <p class="footer-tag">Tecnologia a serviço de quem serve.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible')), 100);
+  </script>
+</body>
+</html>

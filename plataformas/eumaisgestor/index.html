@@ -1,1 +1,670 @@
-eumaisgestor
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EU⁺ Gestor. Estrutura para quem lidera. Construção de rotinas gerenciais, gestão de equipes e desenvolvimento de autonomia com clareza e método." />
+  <title>EU⁺ Gestor | Estrutura para quem lidera</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#060E18;
+      --bg2:#0A1624;
+      --bg3:#0E1E30;
+      --gold:#C4974A;
+      --gold2:#D4AA62;
+      --text:#EEF0F2;
+      --muted:#7A8FA3;
+      --border:rgba(196,151,74,0.18);
+      --border2:rgba(196,151,74,0.08);
+      --panel:rgba(10,22,36,0.90);
+      --blue:#4A9BC4;
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3{ font-family:'Cormorant Garamond',serif; line-height:1.12; }
+    .container{ max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+    a{ color:inherit; text-decoration:none; }
+
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:100;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 40px;
+      background:rgba(6,14,24,0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.3rem;
+      font-weight:600;
+      letter-spacing:.02em;
+      display:flex;
+      align-items:flex-start;
+      gap:4px;
+      color:var(--text);
+    }
+    .nav-logo .plus{
+      font-size:.42em;
+      vertical-align:super;
+      color:var(--gold);
+      font-family:'Cormorant Garamond',serif;
+      font-weight:600;
+    }
+    .nav-back{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-size:.75rem;
+      font-weight:400;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:7px 16px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .nav-back:hover{ color:var(--gold); border-color:rgba(196,151,74,0.38); }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:62px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:-120px; right:-220px;
+      width:760px; height:760px;
+      background:radial-gradient(circle, rgba(196,151,74,0.15) 0, transparent 62%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      left:0; top:15%; bottom:15%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent, rgba(196,151,74,0.25), transparent);
+    }
+    .hero-accent{
+      position:absolute;
+      right:0; top:0; bottom:0;
+      width:5px;
+      background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity:.6;
+    }
+    .hero-inner{ max-width:760px; padding:80px 0; }
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:.7rem;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:28px;
+    }
+    .hero-eyebrow::before{
+      content:'';
+      width:28px;
+      height:1px;
+      background:var(--gold);
+      display:block;
+    }
+    .hero h1{
+      font-size:clamp(2.8rem, 7vw, 5.5rem);
+      font-weight:300;
+      margin-bottom:24px;
+    }
+    .hero h1 em{ font-style:italic; color:var(--gold); }
+    .hero-sub{
+      font-size:clamp(1rem, 2vw, 1.15rem);
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.78;
+      max-width:620px;
+      margin-bottom:30px;
+    }
+    .hero-note{
+      font-size:.88rem;
+      color:#d9e1e8;
+      max-width:640px;
+      margin-bottom:42px;
+      border-left:2px solid rgba(196,151,74,0.34);
+      padding-left:14px;
+    }
+    .hero-ctas{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn-primary,.btn-outline{
+      display:inline-block;
+      font-size:.82rem;
+      font-weight:500;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:14px 28px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .btn-primary{
+      color:var(--bg);
+      background:var(--gold);
+      border:1px solid var(--gold);
+    }
+    .btn-primary:hover{ background:var(--gold2); border-color:var(--gold2); transform:translateY(-1px); }
+    .btn-outline{
+      color:var(--text);
+      border:1px solid rgba(238,240,242,0.18);
+    }
+    .btn-outline:hover{ border-color:var(--gold); color:var(--gold); }
+
+    .hero-stats{
+      display:flex;
+      gap:40px;
+      flex-wrap:wrap;
+      margin-top:56px;
+      padding-top:40px;
+      border-top:1px solid var(--border2);
+    }
+    .hero-stat-n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.1rem;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:4px;
+    }
+    .hero-stat-l{
+      font-size:.75rem;
+      font-weight:300;
+      color:var(--muted);
+      max-width:170px;
+    }
+
+    .sec{ padding:80px 0; position:relative; z-index:1; }
+    .sec + .sec{ border-top:1px solid var(--border2); }
+    .sec-label{
+      font-size:.68rem;
+      font-weight:500;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sec-label::before{
+      content:'';
+      width:20px;
+      height:1px;
+      background:var(--gold);
+      display:block;
+    }
+    .sec h2{
+      font-size:clamp(1.8rem, 4vw, 2.8rem);
+      font-weight:400;
+      margin-bottom:14px;
+    }
+    .sec h2 em{ color:var(--gold); font-style:italic; }
+    .sec-sub{
+      font-size:.93rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.75;
+      max-width:620px;
+      margin-bottom:42px;
+    }
+
+    .highlight-box{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:3px;
+      padding:34px 28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .highlight-box::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .tool-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.62rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold);
+      background:rgba(196,151,74,0.08);
+      border:1px solid rgba(196,151,74,0.22);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .highlight-box h3{
+      font-size:1.8rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .highlight-box p{
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.75;
+      max-width:760px;
+    }
+    .highlight-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .card{
+      background:var(--bg2);
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:28px 22px;
+      position:relative;
+      overflow:hidden;
+      transition:.25s;
+    }
+    .card:hover{ border-color:rgba(196,151,74,0.35); transform:translateY(-2px); }
+    .card .n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:3rem;
+      font-style:italic;
+      color:rgba(196,151,74,0.12);
+      line-height:1;
+      margin-bottom:16px;
+      display:block;
+    }
+    .card h3{
+      font-size:1.15rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .card p{
+      font-size:.86rem;
+      color:var(--muted);
+      line-height:1.72;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .sol-card{
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:24px 22px;
+      background:var(--bg2);
+      transition:.25s;
+    }
+    .sol-card:hover{ border-color:rgba(196,151,74,0.3); background:var(--bg3); }
+    .sol-tag{
+      font-size:.6rem;
+      font-weight:500;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+    .sol-card h3{
+      font-size:1.05rem;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .sol-card p{
+      font-size:.8rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .sol-status{
+      display:inline-block;
+      margin-top:10px;
+      font-size:.6rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:2px 8px;
+      border-radius:2px;
+      color:var(--gold);
+      background:rgba(196,151,74,0.1);
+      border:1px solid rgba(196,151,74,0.22);
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      padding:36px 0 28px;
+      background:var(--bg2);
+      position:relative;
+      z-index:1;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .footer-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.05rem;
+      color:var(--text);
+    }
+    .footer-logo span{ color:var(--gold); }
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      font-size:.78rem;
+      font-weight:300;
+      color:var(--muted);
+    }
+    .footer-links a:hover{ color:var(--gold); }
+    .footer-bottom{
+      border-top:1px solid var(--border2);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .footer-copy{ font-size:.68rem; color:rgba(122,143,163,0.55); }
+    .footer-tag{
+      font-family:'Cormorant Garamond',serif;
+      font-size:.85rem;
+      font-style:italic;
+      color:rgba(196,151,74,0.42);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible{ opacity:1; transform:translateY(0); }
+
+    @media (max-width:900px){
+      nav{ padding:16px 20px; }
+      .grid-3,.grid-2{ grid-template-columns:1fr; }
+      .hero-stats{ gap:22px; }
+      .highlight-head{ flex-direction:column; }
+      .footer-inner,.footer-bottom{ flex-direction:column; align-items:flex-start; }
+      .hero{ padding-top:72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#top" class="nav-logo">EU<sup class="plus">+</sup> <span>Gestor</span></a>
+    <a href="#contato" class="nav-back">Falar agora</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-accent"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-eyebrow reveal">EU⁺ GESTOR</div>
+          <h1 class="reveal">Estrutura para <em>quem lidera</em>.</h1>
+          <p class="hero-sub reveal">
+            Uma frente do ecossistema EU⁺ desenvolvida para líderes que precisam organizar pessoas, decisões e entregas com mais método, mais clareza e menos centralização.
+          </p>
+          <p class="hero-note reveal">
+            Gestão não é controlar pessoas. É construir capacidade através delas. O foco desta frente é a construção de rotinas gerenciais que fortaleçam autonomia, consistência e resultado.
+          </p>
+          <div class="hero-ctas reveal">
+            <a href="#ferramenta" class="btn-primary">Ver soluções</a>
+            <a href="#contato" class="btn-outline">Solicitar contato</a>
+          </div>
+          <div class="hero-stats reveal">
+            <div>
+              <div class="hero-stat-n">ROTINA</div>
+              <div class="hero-stat-l">Construção de ritmos de gestão com método e consistência.</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">TIME</div>
+              <div class="hero-stat-l">Mais autonomia para equipes e menos dependência do gestor.</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">RESULTADO</div>
+              <div class="hero-stat-l">Melhor desempenho coletivo e mais capacidade de entrega.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="ferramenta">
+      <div class="container">
+        <div class="sec-label reveal">Ferramenta em destaque</div>
+        <h2 class="reveal">Construção de <em>Rotinas Gerenciais</em> como base da liderança.</h2>
+        <p class="sec-sub reveal">
+          Esta frente organiza o pensamento de gestão em soluções práticas, pensadas para transformar a liderança em um sistema mais previsível, saudável e eficiente.
+        </p>
+
+        <div class="highlight-box reveal">
+          <div class="tool-pill">Disponível no ecossistema</div>
+          <h3>EU⁺ Gestor</h3>
+          <p>
+            Para líderes de equipes, coordenadores, supervisores, gerentes e profissionais recém-promovidos para funções de gestão. A proposta central é fortalecer o líder para que ele deixe de ser gargalo e passe a ser multiplicador de capacidade.
+          </p>
+          <div class="highlight-actions">
+            <a class="btn-primary" href="#contato">Falar sobre a solução</a>
+            <a class="btn-outline" href="#catalogo">Ver catálogo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="institucional">
+      <div class="container">
+        <div class="sec-label reveal">Base institucional</div>
+        <h2 class="reveal">O EU⁺ Gestor preserva a <em>identidade do ecossistema</em>.</h2>
+        <p class="sec-sub reveal">
+          A estrutura visual mantém o padrão institucional do Grupo EU⁺, com sofisticação, clareza e perenidade, respeitando a linguagem oficial da marca.
+        </p>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <span class="n">01</span>
+            <h3>Autoridade</h3>
+            <p>Uma presença digital coerente com o posicionamento do ecossistema e com o perfil de liderança que a frente representa.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">02</span>
+            <h3>Clareza</h3>
+            <p>Conteúdo direto, premium e funcional, evitando poluição visual e reforçando a leitura institucional da marca.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">03</span>
+            <h3>Escala</h3>
+            <p>Estrutura pronta para receber novas páginas, novas soluções e novas frentes sem romper a unidade visual.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="solucoes">
+      <div class="container">
+        <div class="sec-label reveal">Soluções</div>
+        <h2 class="reveal">Foco em liderança, método e <em>autonomia operacional</em>.</h2>
+        <p class="sec-sub reveal">
+          As soluções abaixo podem ser expandidas depois em páginas próprias, mantendo este portal como referência institucional e ponto de conversão inicial.
+        </p>
+
+        <div class="grid-2">
+          <div class="sol-card reveal">
+            <div class="sol-tag">Fundamentos</div>
+            <h3>Fundamentos de Gestão</h3>
+            <p>Base conceitual para apoiar a transição de técnico para gestor, com linguagem acessível e aplicação prática.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Equipe</div>
+            <h3>Gestão de Equipes</h3>
+            <p>Estrutura para organizar papéis, alinhar expectativa e desenvolver trabalho coletivo com mais clareza.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Ritual</div>
+            <h3>Reuniões de Gestão</h3>
+            <p>Modelo de encontros gerenciais para decisão, acompanhamento e correção de rota sem desperdício de tempo.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Delegação</div>
+            <h3>Delegação</h3>
+            <p>Ferramenta para transferência de responsabilidade com segurança, acompanhamento e desenvolvimento do time.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Performance</div>
+            <h3>Gestão por Indicadores</h3>
+            <p>Leitura objetiva de resultados para sustentar decisões mais rápidas, consistentes e responsáveis.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Autonomia</div>
+            <h3>Construção de Rotinas Gerenciais</h3>
+            <p>Organização do dia, da semana e do ciclo de gestão para que o líder consiga conduzir sem se sobrecarregar.</p>
+            <span class="sol-status">Destaque</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Pessoas</div>
+            <h3>Feedback e Desenvolvimento de Times</h3>
+            <p>Práticas para fortalecer cultura, responsabilidade, aprendizado e consistência de desempenho.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Conflitos</div>
+            <h3>Gestão de Conflitos</h3>
+            <p>Estrutura para lidar com tensões de equipe com postura, clareza e foco em solução.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="resultado">
+      <div class="container">
+        <div class="sec-label reveal">Resultado esperado</div>
+        <h2 class="reveal">Líderes que criam autonomia ampliam o <em>valor da equipe</em>.</h2>
+        <p class="sec-sub reveal">
+          O objetivo é reduzir centralização, melhorar desempenho coletivo e aumentar a capacidade de entrega sem depender exclusivamente da presença do gestor.
+        </p>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <span class="n">01</span>
+            <h3>Equipes mais autônomas</h3>
+            <p>As pessoas passam a assumir com mais segurança aquilo que antes dependia da liderança o tempo todo.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">02</span>
+            <h3>Menos gargalo operacional</h3>
+            <p>O gestor deixa de ser ponto único de decisão e começa a operar com mais visão e menos sobrecarga.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">03</span>
+            <h3>Maior capacidade de entrega</h3>
+            <p>O time entrega mais, com mais consistência, porque existe método, clareza e rotina de acompanhamento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contato">
+      <div class="container">
+        <div class="highlight-box reveal">
+          <div class="sec-label" style="margin-bottom:18px;">Contato direto</div>
+          <h2 style="margin-bottom:16px;">Vamos estruturar sua <em>rotina gerencial</em>.</h2>
+          <p class="sec-sub" style="margin-bottom:22px; max-width:720px;">
+            A partir daqui, o visitante pode falar diretamente com a equipe para receber direcionamento, conhecer a frente EU⁺ Gestor e entender qual solução faz mais sentido para sua realidade.
+          </p>
+          <div class="highlight-actions">
+            <a href="mailto:eumaisempresa@gmail.com" class="btn-primary">E-mail institucional</a>
+            <a href="https://wa.me/5527998131806" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="#" class="btn-outline">Página da solução</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#top" class="footer-logo">EU<sup class="plus">+</sup> <span>Gestor</span></a>
+        <div class="footer-links">
+          <a href="#ferramenta">Ferramenta</a>
+          <a href="#institucional">Institucional</a>
+          <a href="#solucoes">Soluções</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Grupo EU⁺ | EU⁺ Gestor</p>
+        <p class="footer-tag">Liderar é transformar direção em resultado.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible')), 100);
+  </script>
+</body>
+</html>

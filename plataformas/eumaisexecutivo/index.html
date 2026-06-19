@@ -1,1 +1,669 @@
-eumaisexecutivo
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EU⁺ Executivo. Estrutura para quem lidera. Preparação para cargos estratégicos, visão de negócio e desenvolvimento de competências executivas." />
+  <title>EU⁺ Executivo | Estrutura para quem lidera</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#060E18;
+      --bg2:#0A1624;
+      --bg3:#0E1E30;
+      --gold:#C4974A;
+      --gold2:#D4AA62;
+      --text:#EEF0F2;
+      --muted:#7A8FA3;
+      --border:rgba(196,151,74,0.18);
+      --border2:rgba(196,151,74,0.08);
+      --panel:rgba(10,22,36,0.90);
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3{ font-family:'Cormorant Garamond',serif; line-height:1.12; }
+    .container{ max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+    a{ color:inherit; text-decoration:none; }
+
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:100;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 40px;
+      background:rgba(6,14,24,0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.3rem;
+      font-weight:600;
+      letter-spacing:.02em;
+      display:flex;
+      align-items:flex-start;
+      gap:4px;
+      color:var(--text);
+    }
+    .nav-logo .plus{
+      font-size:.42em;
+      vertical-align:super;
+      color:var(--gold);
+      font-family:'Cormorant Garamond',serif;
+      font-weight:600;
+    }
+    .nav-back{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-size:.75rem;
+      font-weight:400;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:7px 16px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .nav-back:hover{ color:var(--gold); border-color:rgba(196,151,74,0.38); }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:62px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:-120px; right:-220px;
+      width:760px; height:760px;
+      background:radial-gradient(circle, rgba(196,151,74,0.15) 0, transparent 62%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      left:0; top:15%; bottom:15%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent, rgba(196,151,74,0.25), transparent);
+    }
+    .hero-accent{
+      position:absolute;
+      right:0; top:0; bottom:0;
+      width:5px;
+      background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity:.6;
+    }
+    .hero-inner{ max-width:760px; padding:80px 0; }
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:.7rem;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:28px;
+    }
+    .hero-eyebrow::before{
+      content:'';
+      width:28px;
+      height:1px;
+      background:var(--gold);
+      display:block;
+    }
+    .hero h1{
+      font-size:clamp(2.8rem, 7vw, 5.5rem);
+      font-weight:300;
+      margin-bottom:24px;
+    }
+    .hero h1 em{ font-style:italic; color:var(--gold); }
+    .hero-sub{
+      font-size:clamp(1rem, 2vw, 1.15rem);
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.78;
+      max-width:640px;
+      margin-bottom:30px;
+    }
+    .hero-note{
+      font-size:.88rem;
+      color:#d9e1e8;
+      max-width:660px;
+      margin-bottom:42px;
+      border-left:2px solid rgba(196,151,74,0.34);
+      padding-left:14px;
+    }
+    .hero-ctas{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn-primary,.btn-outline{
+      display:inline-block;
+      font-size:.82rem;
+      font-weight:500;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:14px 28px;
+      border-radius:2px;
+      transition:.2s;
+    }
+    .btn-primary{
+      color:var(--bg);
+      background:var(--gold);
+      border:1px solid var(--gold);
+    }
+    .btn-primary:hover{ background:var(--gold2); border-color:var(--gold2); transform:translateY(-1px); }
+    .btn-outline{
+      color:var(--text);
+      border:1px solid rgba(238,240,242,0.18);
+    }
+    .btn-outline:hover{ border-color:var(--gold); color:var(--gold); }
+
+    .hero-stats{
+      display:flex;
+      gap:40px;
+      flex-wrap:wrap;
+      margin-top:56px;
+      padding-top:40px;
+      border-top:1px solid var(--border2);
+    }
+    .hero-stat-n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.1rem;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:4px;
+    }
+    .hero-stat-l{
+      font-size:.75rem;
+      font-weight:300;
+      color:var(--muted);
+      max-width:180px;
+    }
+
+    .sec{ padding:80px 0; position:relative; z-index:1; }
+    .sec + .sec{ border-top:1px solid var(--border2); }
+    .sec-label{
+      font-size:.68rem;
+      font-weight:500;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sec-label::before{
+      content:'';
+      width:20px;
+      height:1px;
+      background:var(--gold);
+      display:block;
+    }
+    .sec h2{
+      font-size:clamp(1.8rem, 4vw, 2.8rem);
+      font-weight:400;
+      margin-bottom:14px;
+    }
+    .sec h2 em{ color:var(--gold); font-style:italic; }
+    .sec-sub{
+      font-size:.93rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.75;
+      max-width:640px;
+      margin-bottom:42px;
+    }
+
+    .highlight-box{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:3px;
+      padding:34px 28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .highlight-box::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .tool-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.62rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold);
+      background:rgba(196,151,74,0.08);
+      border:1px solid rgba(196,151,74,0.22);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .highlight-box h3{
+      font-size:1.8rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .highlight-box p{
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.75;
+      max-width:760px;
+    }
+    .highlight-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .card{
+      background:var(--bg2);
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:28px 22px;
+      position:relative;
+      overflow:hidden;
+      transition:.25s;
+    }
+    .card:hover{ border-color:rgba(196,151,74,0.35); transform:translateY(-2px); }
+    .card .n{
+      font-family:'Cormorant Garamond',serif;
+      font-size:3rem;
+      font-style:italic;
+      color:rgba(196,151,74,0.12);
+      line-height:1;
+      margin-bottom:16px;
+      display:block;
+    }
+    .card h3{
+      font-size:1.15rem;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .card p{
+      font-size:.86rem;
+      color:var(--muted);
+      line-height:1.72;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .sol-card{
+      border:1px solid var(--border2);
+      border-radius:3px;
+      padding:24px 22px;
+      background:var(--bg2);
+      transition:.25s;
+    }
+    .sol-card:hover{ border-color:rgba(196,151,74,0.3); background:var(--bg3); }
+    .sol-tag{
+      font-size:.6rem;
+      font-weight:500;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+    .sol-card h3{
+      font-size:1.05rem;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .sol-card p{
+      font-size:.8rem;
+      font-weight:300;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .sol-status{
+      display:inline-block;
+      margin-top:10px;
+      font-size:.6rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:2px 8px;
+      border-radius:2px;
+      color:var(--gold);
+      background:rgba(196,151,74,0.1);
+      border:1px solid rgba(196,151,74,0.22);
+    }
+
+    .footer{
+      border-top:1px solid var(--border);
+      padding:36px 0 28px;
+      background:var(--bg2);
+      position:relative;
+      z-index:1;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .footer-logo{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.05rem;
+      color:var(--text);
+    }
+    .footer-logo span{ color:var(--gold); }
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      font-size:.78rem;
+      font-weight:300;
+      color:var(--muted);
+    }
+    .footer-links a:hover{ color:var(--gold); }
+    .footer-bottom{
+      border-top:1px solid var(--border2);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .footer-copy{ font-size:.68rem; color:rgba(122,143,163,0.55); }
+    .footer-tag{
+      font-family:'Cormorant Garamond',serif;
+      font-size:.85rem;
+      font-style:italic;
+      color:rgba(196,151,74,0.42);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible{ opacity:1; transform:translateY(0); }
+
+    @media (max-width:900px){
+      nav{ padding:16px 20px; }
+      .grid-3,.grid-2{ grid-template-columns:1fr; }
+      .hero-stats{ gap:22px; }
+      .highlight-head{ flex-direction:column; }
+      .footer-inner,.footer-bottom{ flex-direction:column; align-items:flex-start; }
+      .hero{ padding-top:72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#top" class="nav-logo">EU<sup class="plus">+</sup> <span>Executivo</span></a>
+    <a href="#contato" class="nav-back">Falar agora</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-accent"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-eyebrow reveal">EU⁺ EXECUTIVO</div>
+          <h1 class="reveal">Prepare-se para <em>liderar o negócio</em>.</h1>
+          <p class="hero-sub reveal">
+            Uma frente do ecossistema EU⁺ criada para profissionais em ascensão e executivos em desenvolvimento que precisam transformar experiência operacional em visão estratégica.
+          </p>
+          <p class="hero-note reveal">
+            Crescimento profissional sem direcionamento gera limites invisíveis. Esta solução ajuda a construir uma carreira executiva com posicionamento, decisão e leitura de negócio.
+          </p>
+          <div class="hero-ctas reveal">
+            <a href="#solucoes" class="btn-primary">Ver soluções</a>
+            <a href="#contato" class="btn-outline">Solicitar contato</a>
+          </div>
+          <div class="hero-stats reveal">
+            <div>
+              <div class="hero-stat-n">VISÃO</div>
+              <div class="hero-stat-l">Capacidade de enxergar o negócio com amplitude e contexto.</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">CARREIRA</div>
+              <div class="hero-stat-l">Preparação para assumir posições estratégicas com segurança.</div>
+            </div>
+            <div>
+              <div class="hero-stat-n">DECISÃO</div>
+              <div class="hero-stat-l">Mais clareza para liderar, comunicar e agir com precisão.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="ferramenta">
+      <div class="container">
+        <div class="sec-label reveal">Ferramenta em destaque</div>
+        <h2 class="reveal">Desenvolvimento executivo com <em>base estratégica</em>.</h2>
+        <p class="sec-sub reveal">
+          Esta frente organiza o crescimento profissional em soluções práticas, pensadas para quem deseja sair da execução e avançar para a liderança do negócio.
+        </p>
+
+        <div class="highlight-box reveal">
+          <div class="tool-pill">Disponível no ecossistema</div>
+          <h3>EU⁺ Executivo</h3>
+          <p>
+            Para profissionais em ascensão, coordenadores, supervisores, gerentes, especialistas e executivos em desenvolvimento. A proposta central é preparar a pessoa para liderar o negócio, e não apenas executar tarefas dentro dele.
+          </p>
+          <div class="highlight-actions">
+            <a class="btn-primary" href="#contato">Falar sobre a solução</a>
+            <a class="btn-outline" href="#catalogo">Ver catálogo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="institucional">
+      <div class="container">
+        <div class="sec-label reveal">Base institucional</div>
+        <h2 class="reveal">A linguagem do EU⁺ Executivo preserva a <em>identidade do ecossistema</em>.</h2>
+        <p class="sec-sub reveal">
+          A estrutura visual segue o manual institucional do Grupo EU⁺, com sofisticação, autoridade e coerência entre plataformas.
+        </p>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <span class="n">01</span>
+            <h3>Autoridade</h3>
+            <p>Presença premium e consistente, adequada ao posicionamento de liderança e crescimento estratégico.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">02</span>
+            <h3>Clareza</h3>
+            <p>Conteúdo direto, elegante e funcional, sem excessos visuais ou linguagem genérica.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">03</span>
+            <h3>Escala</h3>
+            <p>Base pronta para receber páginas futuras e novos conteúdos sem perder unidade institucional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="solucoes">
+      <div class="container">
+        <div class="sec-label reveal">Soluções</div>
+        <h2 class="reveal">Competências para crescimento <em>executivo</em>.</h2>
+        <p class="sec-sub reveal">
+          As soluções abaixo podem depois ser desdobradas em páginas próprias, mantendo este portal como referência institucional e ponto de contato.
+        </p>
+
+        <div class="grid-2">
+          <div class="sol-card reveal">
+            <div class="sol-tag">Carreira</div>
+            <h3>Planejamento de Carreira Executiva</h3>
+            <p>Direção para crescimento profissional com intencionalidade, evitando trajetórias baseadas apenas em oportunidade.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Estratégia</div>
+            <h3>Desenvolvimento de Competências Estratégicas</h3>
+            <p>Formação para ampliar visão, leitura de contexto e capacidade de atuar em níveis mais altos de decisão.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Posicionamento</div>
+            <h3>Posicionamento Profissional</h3>
+            <p>Construção de presença executiva, autoridade e percepção de valor dentro e fora da organização.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Comunicação</div>
+            <h3>Comunicação Executiva</h3>
+            <p>Clareza, objetividade e influência para comunicar decisões, alinhar expectativas e liderar conversas difíceis.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Decisão</div>
+            <h3>Tomada de Decisão</h3>
+            <p>Ferramenta para decidir com mais consistência, leitura de risco e foco em resultado estratégico.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Negócio</div>
+            <h3>Visão de Negócio</h3>
+            <p>Ampliação da compreensão sobre operação, estratégia, contexto corporativo e lógica de crescimento.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Performance</div>
+            <h3>Gestão de Resultados</h3>
+            <p>Leitura objetiva de entregas, metas e indicadores para sustentar evolução executiva.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+          <div class="sol-card reveal">
+            <div class="sol-tag">Liderança</div>
+            <h3>Desenvolvimento de Liderança</h3>
+            <p>Processo para amadurecer postura, influência, repertório e capacidade de condução em níveis estratégicos.</p>
+            <span class="sol-status">Ativo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="resultado">
+      <div class="container">
+        <div class="sec-label reveal">Resultado esperado</div>
+        <h2 class="reveal">Maior empregabilidade e <em>crescimento profissional acelerado</em>.</h2>
+        <p class="sec-sub reveal">
+          O objetivo é preparar profissionais para cargos executivos com visão ampla, adaptação contínua e capacidade de decisão estratégica.
+        </p>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <span class="n">01</span>
+            <h3>Mais empregabilidade</h3>
+            <p>O profissional passa a ser percebido como alguém pronto para contextos de maior responsabilidade.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">02</span>
+            <h3>Preparação executiva</h3>
+            <p>A carreira deixa de ser apenas operacional e ganha repertório para liderança estratégica.</p>
+          </div>
+          <div class="card reveal">
+            <span class="n">03</span>
+            <h3>Atuação estratégica</h3>
+            <p>Maior capacidade de decidir, comunicar e liderar com visão de negócio e foco em resultado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contato">
+      <div class="container">
+        <div class="highlight-box reveal">
+          <div class="sec-label" style="margin-bottom:18px;">Contato direto</div>
+          <h2 style="margin-bottom:16px;">Vamos estruturar sua <em>trajetória executiva</em>.</h2>
+          <p class="sec-sub" style="margin-bottom:22px; max-width:720px;">
+            A partir daqui, o visitante pode falar diretamente com a equipe para receber direcionamento, conhecer a frente EU⁺ Executivo e entender qual solução faz mais sentido para sua evolução profissional.
+          </p>
+          <div class="highlight-actions">
+            <a href="mailto:eumaisempresa@gmail.com" class="btn-primary">E-mail institucional</a>
+            <a href="https://wa.me/5527998131806" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="#" class="btn-outline">Página da solução</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#top" class="footer-logo">EU<sup class="plus">+</sup> <span>Executivo</span></a>
+        <div class="footer-links">
+          <a href="#ferramenta">Ferramenta</a>
+          <a href="#institucional">Institucional</a>
+          <a href="#solucoes">Soluções</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Grupo EU⁺ | EU⁺ Executivo</p>
+        <p class="footer-tag">Estrutura para quem lidera.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible')), 100);
+  </script>
+</body>
+</html>

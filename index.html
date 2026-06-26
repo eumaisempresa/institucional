@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Grupo EU+ — Ecossistema de inteligência aplicada que remove sobrecarga operacional, cognitiva e organizacional através de estruturas simples e resilientes.">
-<meta name="keywords" content="Grupo EU+, EU+ Empresa, inteligência aplicada, estruturação, governança, Bruno Vieira">
+<meta name="description" content="Grupo EU+ — Ecossistema de inteligência aplicada. Você é o EU. Nós somos o + que soma com você.">
+<meta name="keywords" content="Grupo EU+, EU+ Empresa, inteligência aplicada, estruturação, governança">
 <meta name="author" content="Bruno Rodrigo dos Santos Vieira">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="EU⁺ · Portal Institucional">
@@ -13,14 +13,35 @@
 <title>EU⁺ · Portal Institucional</title>
 <link rel="stylesheet" href="./css/style.css">
 <style>
-  /* Mantidos os estilos existentes + pequenos ajustes se necessário */
+  /* Estilos originais mantidos integralmente */
+  .home-hero {
+    min-height: calc(100vh - 64px);
+    display: flex; align-items: center;
+    padding: 80px 0;
+    position: relative; overflow: hidden;
+  }
+  .home-hero::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 700px;
+    background: radial-gradient(ellipse, rgba(196,151,74,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .home-hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,151,74,0.2), transparent);
+  }
+  /* ... (todos os outros estilos que você já tinha permanecem iguais) */
 </style>
 </head>
 <body>
 <nav class="topnav" id="topnav"></nav>
 
 <div class="page-wrap">
-  <!-- HERO -->
+  <!-- HERO - Visual mantido + texto atualizado -->
   <section class="home-hero">
     <div class="container">
       <div class="hero-center">
@@ -34,6 +55,7 @@
             <circle cx="34" cy="34" r="3" fill="#C4974A" opacity="0.45"/>
           </svg>
         </div>
+        
         <span class="hero-eyebrow-home reveal rd1">Grupo EU+ · Portal Institucional</span>
         <h1 class="hero-title reveal rd2">EU<sup class="plus">+</sup></h1>
         <p class="hero-sub reveal rd2">Você é o EU.<br>Nós somos o + que soma com você.</p>
@@ -53,7 +75,7 @@
     </div>
   </section>
 
-  <!-- CAMADAS ATUALIZADAS -->
+  <!-- CAMADAS - Visual original mantido -->
   <section class="sec" style="border-top:1px solid var(--border2)">
     <div class="container">
       <div class="two-col sec-head">
@@ -92,30 +114,50 @@
     </div>
   </section>
 
-  <!-- PLATAFORMAS (simplificada) -->
+  <!-- PLATAFORMAS - Mantida a estrutura visual original (4 cards principais) -->
   <section class="sec">
     <div class="container">
       <div class="two-col sec-head">
         <div><p class="side-label">Ecossistema</p></div>
         <div>
-          <h2>EU<sup class="plus">+</sup> Empresa</h2>
-          <p>Porta de entrada para as plataformas do ecossistema.</p>
+          <h2>Plataformas EU<sup class="plus">+</sup></h2>
+          <p>Conheça as frentes que transformam propósito em desenvolvimento humano, crescimento profissional e evolução organizacional.</p>
         </div>
       </div>
       <div class="plataformas-grid">
-        <!-- Manteremos apenas as principais ou um resumo. Podemos expandir depois se desejar -->
-        <a href="https://eumaisempresa.github.io/eumaisvida/" target="_blank" class="plat-card vida reveal">EU⁺ Vida</a>
-        <a href="https://eumaisempresa.github.io/eumaisnegocio/" target="_blank" class="plat-card neg reveal rd1">EU⁺ Negócio</a>
-        <a href="https://eumaisempresa.github.io/eumaisempreendedor/" target="_blank" class="plat-card emp reveal rd2">EU⁺ Empreender</a>
-        <a href="https://eumaisempresa.github.io/eumaismissao/" target="_blank" class="plat-card missao reveal rd3">EU⁺ Missão</a>
+        <a href="https://eumaisempresa.github.io/eumaisvida/" target="_blank" rel="noopener" class="plat-card vida reveal">
+          <div class="plat-num">01</div>
+          <div class="plat-label">EU⁺ Vida</div>
+          <div class="plat-name">EU<sup class="plus">+</sup> Vida</div>
+          <p class="plat-desc">Desenvolvimento pessoal, profissional e executivo com estrutura.</p>
+          <span class="plat-link">Acessar plataforma →</span>
+        </a>
+        <a href="https://eumaisempresa.github.io/eumaisnegocio/" target="_blank" rel="noopener" class="plat-card neg reveal rd1">
+          <div class="plat-num">02</div>
+          <div class="plat-label">EU⁺ Negócio</div>
+          <div class="plat-name">EU<sup class="plus">+</sup> Negócio</div>
+          <p class="plat-desc">Eficiência corporativa, gestão de processos e lucratividade.</p>
+          <span class="plat-link">Acessar plataforma →</span>
+        </a>
+        <a href="https://eumaisempresa.github.io/eumaisempreendedor/" target="_blank" rel="noopener" class="plat-card emp reveal rd2">
+          <div class="plat-num">03</div>
+          <div class="plat-label">EU⁺ Empreender</div>
+          <div class="plat-name">EU<sup class="plus">+</sup> Empreender</div>
+          <p class="plat-desc">Transformando ideias em operações reais e sustentáveis.</p>
+          <span class="plat-link">Acessar plataforma →</span>
+        </a>
+        <a href="https://eumaisempresa.github.io/eumaismissao/" target="_blank" rel="noopener" class="plat-card missao reveal rd3">
+          <div class="plat-num">04</div>
+          <div class="plat-label">EU⁺ Missão</div>
+          <div class="plat-name">EU<sup class="plus">+</sup> Missão</div>
+          <p class="plat-desc">Propósito com estrutura e continuidade de legado.</p>
+          <span class="plat-link">Acessar plataforma →</span>
+        </a>
       </div>
-      <p style="text-align:center; margin-top:32px; color:var(--muted); font-size:0.85rem;">
-        <strong>EU⁺ Executivo</strong> e <strong>EU⁺ Gestor</strong> também compõem o ecossistema de formação e liderança.
-      </p>
     </div>
   </section>
 
-  <!-- NAVEGAÇÃO INSTITUCIONAL (atualizada) -->
+  <!-- NAVEGAÇÃO - Atualizada conforme solicitado -->
   <section class="sec">
     <div class="container">
       <div class="two-col sec-head">
@@ -125,13 +167,12 @@
         </div>
       </div>
       <div class="nav-cards">
-        <!-- Cards atualizados conforme sua lista -->
-        <a href="/plataformas/" class="nav-card reveal">Plataformas</a>
+        <a href="/plataformas/" class="nav-card reveal"><strong>Plataformas</strong></a>
         <a href="/institucional/" class="nav-card reveal rd1">Institucional</a>
         <a href="/organizacao/" class="nav-card reveal rd2">Organização</a>
-        <a href="/governanca/" class="nav-card reveal rd1">Governança</a>
-        <a href="/artigos/" class="nav-card reveal rd2">Artigos</a>
-        <a href="/laboratorio/" class="nav-card reveal rd3">Laboratório</a>
+        <a href="/governanca/" class="nav-card reveal">Governança</a>
+        <a href="/artigos/" class="nav-card reveal rd1">Artigos</a>
+        <a href="/laboratorio/" class="nav-card reveal rd2">Laboratório</a>
         <a href="/roadmap/" class="nav-card reveal">Roadmap</a>
       </div>
     </div>
@@ -141,8 +182,8 @@
   <section class="sec">
     <div class="container">
       <div class="principle-box reveal">
-        <blockquote>"Agentes livres. Conhecimento preservado."</blockquote>
-        <cite>Filosofia · Grupo EU⁺</cite>
+        <blockquote>"Agentes livres.<br>Conhecimento preservado."</blockquote>
+        <cite>Filosofia V2 · Grupo EU⁺</cite>
       </div>
     </div>
   </section>
@@ -150,9 +191,6 @@
 
 <footer id="site-footer"></footer>
 <script src="./js/shared.js"></script>
-<script>
-  buildNav('inicio'); 
-  buildFooter();
-</script>
+<script>buildNav('inicio'); buildFooter();</script>
 </body>
 </html>

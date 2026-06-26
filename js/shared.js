@@ -15,9 +15,10 @@ const NAV = [
 
 const CONTACT = {
   nome:     'Bruno Vieira',
-  email:    'eumaisempresa@gmail.com',
+  email:    'brunorsvieira@gmail.com',
+  emailCorp:'eumaisempresa@gmail.com',
   phone:    '(27) 99813-1806',
-  linkedin: 'https://www.linkedin.com/in/brunorsantosvieira',
+  linkedin: 'https://www.linkedin.com/company/eumaisempresa/?viewAsMember=true',
 };
 
 // ── BUILD NAV ──
@@ -80,7 +81,15 @@ function buildFooter() {
               <rect x="1.5" y="3" width="11" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/>
               <path d="M1.5 4l5.5 4 5.5-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
             </svg>
-            <span>${CONTACT.email}</span>
+            <span>${CONTACT.email} <span style="font-size:0.68em;opacity:0.5">(presidência)</span></span>
+          </a>
+
+          <a href="mailto:${CONTACT.emailCorp}" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="1.5" y="3" width="11" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M1.5 4l5.5 4 5.5-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span>${CONTACT.emailCorp} <span style="font-size:0.68em;opacity:0.5">(corporativo)</span></span>
           </a>
 
           <a href="tel:+5527998131806" class="footer-contact-item">
@@ -95,7 +104,7 @@ function buildFooter() {
               <rect x="1.5" y="1.5" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/>
               <path d="M4 6v4M4 4.5v.01M6.5 10V8a1.5 1.5 0 013 0v2M6.5 7v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
             </svg>
-            <span>${CONTACT.nome} · LinkedIn</span>
+            <span>Grupo EU⁺ · LinkedIn</span>
           </a>
 
         </div>

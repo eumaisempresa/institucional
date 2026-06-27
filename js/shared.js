@@ -47,8 +47,24 @@ function buildNav(activeKey) {
       </button>
     </div>`;
 
-  document.getElementById('nav-burger')?.addEventListener('click', () => {
-    document.getElementById('nav-links')?.classList.toggle('open');
+  const burger = document.getElementById('nav-burger');
+  const navList = document.getElementById('nav-links');
+
+  burger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navList?.classList.toggle('open');
+  });
+
+  // Fechar ao clicar em qualquer link do menu
+  navList?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navList.classList.remove('open'));
+  });
+
+  // Fechar ao clicar fora do menu
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.topnav')) {
+      navList?.classList.remove('open');
+    }
   });
 }
 

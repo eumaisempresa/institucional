@@ -11,6 +11,7 @@ const NAV = [
   { label: 'Artigos',       href: BASE + '/artigos/',            key: 'artigos' },
   { label: 'Laboratório',   href: BASE + '/laboratorio/',        key: 'laboratorio' },
   { label: 'Roadmap',       href: BASE + '/roadmap/',            key: 'roadmap' },
+  { label: 'Fale Conosco',  href: BASE + '/faleconosco/',        key: 'faleconosco' },
 ];
 
 const CONTACT = {

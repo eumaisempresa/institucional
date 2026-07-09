@@ -1,1 +1,326 @@
-negocio
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EU⁺ Negócio — Inteligência prática para negócios que geram caixa e constroem legado.">
+<title>EU⁺ Negócio — Inteligência Prática para Negócios Reais</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg:    #161616;
+  --bg2:   #1C1C1C;
+  --bg3:   #222222;
+  --bg4:   #2A2A2A;
+  --gold:  #C4A265;
+  --gold2: #D4B483;
+  --text:  #F5F2EC;
+  --muted: #9A8E7A;
+  --border:  rgba(196,162,101,0.18);
+  --border2: rgba(196,162,101,0.08);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.12; }
+sup.plus { font-size: 0.5em; vertical-align: super; color: var(--gold); font-family: 'DM Sans', sans-serif; font-weight: 500; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(22,22,22,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.02em; }
+.nav-logo .frente { color: var(--gold); }
+.nav-back { display: inline-flex; align-items: center; gap: 7px; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 7px 16px; border-radius: 2px; transition: all 0.2s; }
+.nav-back:hover { color: var(--gold); border-color: rgba(196,162,101,0.4); }
+.nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; color: var(--muted); }
+.mob-nav { display: none; position: fixed; top: 62px; left: 0; right: 0; background: rgba(22,22,22,0.98); border-bottom: 1px solid var(--border); padding: 20px 28px; flex-direction: column; gap: 0; z-index: 99; }
+.mob-nav.open { display: flex; }
+.mob-nav a { font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--border2); transition: color 0.2s; }
+.mob-nav a:last-child { border-bottom: none; }
+.mob-nav a:hover { color: var(--gold); }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 62px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -100px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(196,162,101,0.15) 0%, transparent 60%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); opacity: 0.5; }
+.hero-inner { max-width: 760px; position: relative; z-index: 1; padding: 80px 0; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; }
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+.hero h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 300; color: var(--text); line-height: 1.06; margin-bottom: 24px; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300; color: var(--muted); line-height: 1.78; max-width: 520px; margin-bottom: 48px; }
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.btn-primary { display: inline-block; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 14px 32px; text-decoration: none; border: 1px solid var(--gold); transition: all 0.2s; border-radius: 2px; }
+.btn-primary:hover { background: var(--gold2); border-color: var(--gold2); transform: translateY(-1px); }
+.btn-outline { display: inline-block; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); text-decoration: none; border: 1px solid rgba(245,242,236,0.2); padding: 14px 32px; transition: all 0.2s; border-radius: 2px; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.hero-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border2); }
+.hero-stat-n { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.hero-stat-l { font-size: 0.75rem; font-weight: 300; color: var(--muted); line-height: 1.4; max-width: 120px; }
+
+/* SECTIONS */
+.sec { padding: 80px 0; position: relative; z-index: 1; }
+.sec + .sec { border-top: 1px solid var(--border2); }
+.sec-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: inline-flex; align-items: center; gap: 10px; }
+.sec-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+.sec h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--text); margin-bottom: 14px; line-height: 1.12; }
+.sec h2 em { font-style: italic; color: var(--gold); }
+.sec-sub { font-size: 0.93rem; font-weight: 300; color: var(--muted); line-height: 1.75; max-width: 520px; margin-bottom: 52px; }
+
+/* DOR */
+.dor-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.dor-item { background: var(--bg2); padding: 36px 28px; position: relative; overflow: hidden; transition: background 0.3s; }
+.dor-item:first-child { border-radius: 3px 0 0 3px; }
+.dor-item:last-child { border-radius: 0 3px 3px 0; }
+.dor-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+.dor-item:hover { background: var(--bg3); }
+.dor-item:hover::before { opacity: 1; }
+.dor-n { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: rgba(196,162,101,0.1); line-height: 1; margin-bottom: 18px; display: block; }
+.dor-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+.dor-item p { font-size: 0.86rem; font-weight: 300; color: var(--muted); line-height: 1.72; }
+
+/* STEPS */
+.steps-wrap { display: flex; flex-direction: column; gap: 2px; }
+.step { display: grid; grid-template-columns: 72px 1fr; background: var(--bg2); overflow: hidden; border-radius: 2px; transition: background 0.2s; }
+.step:hover { background: var(--bg3); }
+.step-num { background: var(--bg3); border-right: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; font-style: italic; color: rgba(196,162,101,0.3); transition: background 0.2s; padding: 28px 0; }
+.step:hover .step-num { background: var(--bg4); }
+.step-body { padding: 28px 32px; }
+.step-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.step-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.step-body p { font-size: 0.87rem; font-weight: 300; color: var(--muted); line-height: 1.72; }
+
+/* PÚBLICO */
+.publico-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.pub-card { border: 1px solid var(--border2); border-radius: 3px; padding: 28px 22px; background: var(--bg2); transition: border-color 0.3s, transform 0.2s; position: relative; overflow: hidden; }
+.pub-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+.pub-card:hover { border-color: rgba(196,162,101,0.35); transform: translateY(-2px); }
+.pub-card:hover::before { width: 100%; }
+.pub-icon { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg3); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 16px; }
+.pub-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.pub-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.pub-card p { font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+/* SOLUÇÕES */
+.solucoes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.sol-card { border: 1px solid var(--border2); border-radius: 3px; padding: 24px 22px; background: var(--bg2); display: flex; align-items: flex-start; gap: 16px; transition: border-color 0.25s, background 0.25s; }
+.sol-card:hover { border-color: rgba(196,162,101,0.3); background: var(--bg3); }
+.sol-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--gold); background: transparent; flex-shrink: 0; margin-top: 6px; transition: background 0.2s; }
+.sol-card:hover .sol-dot { background: var(--gold); }
+.sol-tag { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.sol-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 5px; line-height: 1.2; }
+.sol-card p { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+.sol-status { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-top: 6px; display: inline-block; color: var(--gold); background: rgba(196,162,101,0.1); border: 1px solid rgba(196,162,101,0.22); }
+.sol-status.dev { color: var(--muted); background: rgba(122,143,163,0.08); border-color: rgba(122,143,163,0.18); }
+
+/* CTA */
+.cta-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 64px 52px; text-align: center; position: relative; overflow: hidden; }
+.cta-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; margin-bottom: 16px; }
+.cta-box p { font-size: 0.93rem; font-weight: 300; color: var(--muted); line-height: 1.75; max-width: 500px; margin: 0 auto 36px; }
+.cta-form { display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto; text-align: left; }
+.cta-form input, .cta-form select { background: rgba(28,28,28,0.8); border: 1px solid var(--border); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 300; padding: 13px 16px; border-radius: 2px; outline: none; transition: border-color 0.2s; width: 100%; }
+.cta-form input:focus, .cta-form select:focus { border-color: var(--gold); }
+.cta-form input::placeholder { color: rgba(245,242,236,0.2); }
+.cta-form select { appearance: none; cursor: pointer; }
+.cta-form select option { background: #1C1C1C; }
+.cta-form button { background: var(--gold); color: var(--bg); border: none; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+.cta-form button:hover { background: var(--gold2); transform: translateY(-1px); }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 36px 0 28px; background: var(--bg2); position: relative; z-index: 1; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--text); text-decoration: none; }
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 0.78rem; font-weight: 300; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid var(--border2); padding-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-size: 0.68rem; font-weight: 300; color: rgba(154,142,122,0.4); }
+.footer-tag { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-weight: 300; font-style: italic; color: rgba(196,162,101,0.4); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.08s; } .rd2 { transition-delay: 0.16s; } .rd3 { transition-delay: 0.24s; } .rd4 { transition-delay: 0.32s; }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-back span { display: none; }
+  .nav-burger { display: block; }
+  .dor-grid { grid-template-columns: 1fr; }
+  .dor-item:first-child { border-radius: 3px 3px 0 0; }
+  .dor-item:last-child { border-radius: 0 0 3px 3px; }
+  .publico-grid, .solucoes-grid { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 52px 1fr; }
+  .cta-box { padding: 40px 24px; }
+  .footer-inner, .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://eumaisempresa.github.io/Eumais/frentes/index.html" class="nav-logo">EU<sup class="plus">+</sup> <span class="frente">Negócio</span></a>
+  <a href="https://eumaisempresa.github.io/Eumais/frentes/index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Voltar ao portal</span>
+  </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" onclick="document.getElementById('mob').classList.toggle('open')">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </button>
+</nav>
+
+<div class="mob-nav" id="mob">
+  <a href="#problema" onclick="document.getElementById('mob').classList.remove('open')">O problema</a>
+  <a href="#como-funciona" onclick="document.getElementById('mob').classList.remove('open')">Como funciona</a>
+  <a href="#para-quem" onclick="document.getElementById('mob').classList.remove('open')">Para quem</a>
+  <a href="#solucoes" onclick="document.getElementById('mob').classList.remove('open')">Soluções</a>
+  <a href="#contato" onclick="document.getElementById('mob').classList.remove('open')">Contato</a>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow reveal">EU⁺ Negócio</div>
+      <h1 class="reveal rd1">Inteligência prática<br>para negócios que <em>geram caixa</em><br>e constroem legado.</h1>
+      <p class="hero-sub reveal rd2">Soluções próprias, leves e estratégicas. Não competimos com ferramentas genéricas — criamos valor real alinhado ao propósito do seu negócio.</p>
+      <div class="hero-ctas reveal rd3">
+        <a href="#contato" class="btn-primary">Fazer diagnóstico gratuito</a>
+        <a href="#solucoes" class="btn-outline">Ver soluções</a>
+      </div>
+      <div class="hero-stats reveal rd4">
+        <div><div class="hero-stat-n">10+</div><div class="hero-stat-l">Soluções para gestão e crescimento</div></div>
+        <div><div class="hero-stat-n">IA</div><div class="hero-stat-l">Como aliada na tomada de decisão</div></div>
+        <div><div class="hero-stat-n">0</div><div class="hero-stat-l">Complexidade desnecessária</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="problema">
+  <div class="container">
+    <div class="sec-label reveal">O problema real</div>
+    <h2 class="reveal rd1">Negócios que produzem resultado<br><em>mas não escalam.</em></h2>
+    <p class="sec-sub reveal rd2">A maioria dos negócios não falha por falta de trabalho. Falha por falta de estrutura, visibilidade e decisões baseadas em dados reais.</p>
+    <div class="dor-grid">
+      <div class="dor-item reveal"><span class="dor-n">01</span><h3>Gestão no improviso</h3><p>Decisões tomadas no feeling, sem painel claro de performance. O gestor apaga incêndio em vez de construir.</p></div>
+      <div class="dor-item reveal rd1"><span class="dor-n">02</span><h3>Caixa sem previsibilidade</h3><p>Faturamento existe mas sobra pouco. Sem visão financeira estruturada, crescer vira risco.</p></div>
+      <div class="dor-item reveal rd2"><span class="dor-n">03</span><h3>Equipe sem direção</h3><p>Time trabalha muito mas sem alinhamento claro. Resultado: retrabalho, conflito e perda de talentos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="como-funciona">
+  <div class="container">
+    <div class="sec-label reveal">O método</div>
+    <h2 class="reveal rd1">Como funciona</h2>
+    <p class="sec-sub reveal rd2">Três etapas para transformar seu negócio em uma operação estruturada, previsível e escalável.</p>
+    <div class="steps-wrap">
+      <div class="step reveal"><div class="step-num">1</div><div class="step-body"><div class="step-label">Diagnóstico</div><h3>Leitura honesta do negócio</h3><p>Avaliamos gestão, finanças, equipe, processos e mercado. Um diagnóstico claro, sem enrolação, com direção.</p></div></div>
+      <div class="step reveal rd1"><div class="step-num">2</div><div class="step-body"><div class="step-label">Estruturação</div><h3>Ferramentas certas para a realidade</h3><p>Implantamos as soluções EU<sup class="plus">+</sup> Negócio adequadas ao seu momento — leves, práticas e orientadas a resultado.</p></div></div>
+      <div class="step reveal rd2"><div class="step-num">3</div><div class="step-body"><div class="step-label">Evolução</div><h3>Crescimento com sustentação</h3><p>Acompanhamento contínuo. Sua estrutura evolui conforme o negócio cresce, sem perder eficiência.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="para-quem">
+  <div class="container">
+    <div class="sec-label reveal">Público</div>
+    <h2 class="reveal rd1">Para quem é</h2>
+    <p class="sec-sub reveal rd2">EU<sup class="plus">+</sup> Negócio foi desenvolvida para gestores e empresários que querem crescer com estrutura.</p>
+    <div class="publico-grid">
+      <div class="pub-card reveal">
+        <div class="pub-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5V4a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M9 10v1M9 10a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+        <div class="pub-label">Empresários</div>
+        <h3>Donos de negócio e operação</h3>
+        <p>Ferramentas para gestão comercial, financeira e de equipe — sem precisar de um time de consultores caros.</p>
+      </div>
+      <div class="pub-card reveal rd1">
+        <div class="pub-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 15V7l6-4 6 4v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="6.5" y="10" width="5" height="5" rx="0.5" stroke="currentColor" stroke-width="1.2"/></svg></div>
+        <div class="pub-label">Varejo e Atacado</div>
+        <h3>Redes, distribuidoras e atacarejo</h3>
+        <p>Inteligência comercial B2B, carteira de clientes, metas de representantes e análise de categorias.</p>
+      </div>
+      <div class="pub-card reveal rd2">
+        <div class="pub-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="3.5" cy="13" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="14.5" cy="13" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M9 7.5v3M9 10.5L3.5 11M9 10.5L14.5 11" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+        <div class="pub-label">Gestores Comerciais</div>
+        <h3>Times de vendas e televendas B2B</h3>
+        <p>Gestão de carteira, acompanhamento de metas e análise de performance sem dependência de TI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="solucoes">
+  <div class="container">
+    <div class="sec-label reveal">Portfólio</div>
+    <h2 class="reveal rd1">Soluções EU<sup class="plus">+</sup> Negócio</h2>
+    <p class="sec-sub reveal rd2">Ferramentas desenvolvidas para resultados reais no dia a dia do negócio.</p>
+    <div class="solucoes-grid">
+      <div class="sol-card reveal"><div class="sol-dot"></div><div><div class="sol-tag">Gestão</div><h3>Gestão de Competências</h3><p>Gestão estratégica de competências, desenvolvimento de equipes e acompanhamento de performance.</p><span class="sol-status">Em desenvolvimento prioritário</span></div></div>
+      <div class="sol-card reveal rd1"><div class="sol-dot"></div><div><div class="sol-tag">Gestão</div><h3>Rotinas & Processos</h3><p>Organização prática de rotinas operacionais, checklists e fluxos que funcionam no dia a dia.</p><span class="sol-status">Em desenvolvimento prioritário</span></div></div>
+      <div class="sol-card reveal rd2"><div class="sol-dot"></div><div><div class="sol-tag">Marketing & Vendas</div><h3>Presença Inteligente</h3><p>Ferramentas para posicionamento, geração de demanda e conversão com foco em autoridade.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal rd3"><div class="sol-dot"></div><div><div class="sol-tag">Finanças</div><h3>Caixa Consciente</h3><p>Visão clara do fluxo de caixa, previsibilidade e controle financeiro sem complexidade excessiva.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal"><div class="sol-dot"></div><div><div class="sol-tag">RH & Pessoas</div><h3>Equipe Viva</h3><p>Gestão de pessoas, clima organizacional e desenvolvimento humano dentro da cultura da empresa.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal rd1"><div class="sol-dot"></div><div><div class="sol-tag">Operações</div><h3>Operações Leves</h3><p>Otimização de processos internos, redução de desperdícios e aumento de eficiência.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal rd2"><div class="sol-dot"></div><div><div class="sol-tag">Estratégia</div><h3>Rota de Crescimento</h3><p>Planejamento estratégico prático, definição de prioridades e acompanhamento de execução.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal rd3"><div class="sol-dot"></div><div><div class="sol-tag">Tecnologia</div><h3>Conexões Inteligentes</h3><p>Integrações e automações leves que conectam suas ferramentas sem adicionar complexidade.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal"><div class="sol-dot"></div><div><div class="sol-tag">Fornecedores</div><h3>Rede de Valor</h3><p>Gestão inteligente de fornecedores, negociações e cadeia de suprimentos.</p><span class="sol-status dev">Em breve</span></div></div>
+      <div class="sol-card reveal rd1"><div class="sol-dot"></div><div><div class="sol-tag">Proteção</div><h3>Proteção Jurídica</h3><p>Modelos, alertas e orientações práticas para reduzir riscos e proteger o patrimônio.</p><span class="sol-status dev">Em breve</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contato">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="sec-label" style="justify-content:center;margin-bottom:20px"><span>Diagnóstico gratuito</span></div>
+      <h2>Seu negócio merece <em>estrutura à altura</em> do resultado que você quer.</h2>
+      <p>Deixe seu contato. Entendemos sua operação e apresentamos as soluções certas para o seu momento.</p>
+      <form class="cta-form" onsubmit="submitForm(event)">
+        <input type="text" placeholder="Nome completo" required>
+        <input type="email" placeholder="E-mail" required>
+        <input type="tel" placeholder="WhatsApp / Telefone">
+        <select>
+          <option value="" disabled selected>Tipo de negócio</option>
+          <option>Varejo / Atacarejo</option>
+          <option>Indústria / Distribuição</option>
+          <option>Serviços B2B</option>
+          <option>Outro</option>
+        </select>
+        <button type="submit">Quero o diagnóstico</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="https://eumaisempresa.github.io/Eumais/" class="footer-logo">EU<sup class="plus">+</sup> <span>Negócio</span></a>
+      <div class="footer-links">
+        <a href="#problema">O problema</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#contato">Contato</a>
+        <a href="https://eumaisempresa.github.io/Eumais/">Portal EU⁺</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 EU⁺ Negócio · Parte do ecossistema EU⁺ · eumaisempresa@gmail.com · (27) 99813-1806</p>
+      <p class="footer-tag">Inteligência prática para negócios reais.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+setTimeout(() => document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible')), 80);
+function submitForm(e) { e.preventDefault(); const btn = e.target.querySelector('button'); btn.textContent = '✓ Recebemos seu contato!'; btn.style.background = '#D4B483'; btn.disabled = true; e.target.reset(); setTimeout(() => { btn.textContent = 'Quero o diagnóstico'; btn.style.background = ''; btn.disabled = false; }, 5000); }
+</script>
+</body>
+</html>

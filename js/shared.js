@@ -121,14 +121,14 @@ function buildFooter() {
               <rect x="1.5" y="1.5" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/>
               <path d="M4 6v4M4 4.5v.01M6.5 10V8a1.5 1.5 0 013 0v2M6.5 7v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
             </svg>
-            <span>Grupo EU⁺ · LinkedIn</span>
+            <span>Ecossistema EU⁺ · LinkedIn</span>
           </a>
 
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Grupo EU⁺ · www.eumaisempresa.com.br · Todos os direitos reservados</p>
+        <p class="footer-copy">© 2026 Ecossistema EU⁺ · www.eumaisempresa.com.br · Todos os direitos reservados</p>
         <p class="footer-purpose">Autonomia integral. Patrimônio permanente.</p>
       </div>
     </div>`;

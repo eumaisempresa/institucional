@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eumaisempresa.com.br/sitemap.xml

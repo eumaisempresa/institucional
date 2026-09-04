@@ -1,6 +1,6 @@
 <!-- Seção de Filtros por Tag -->
 <div class="filter-container" id="tag-filters">
-  <button class="filter-btn active" onclick="filtrarPosts('todos')">Todos</button>
+  <button class="filter-btn active" onclick="filtrarPosts('todos', this)">Todos</button>
 </div>
 
 <!-- Grid onde os Cards dos Artigos serão inseridos -->
@@ -13,13 +13,17 @@ let todosOsPosts = [];
 
 async function carregarPublicacoes() {
   try {
+    // Carrega o JSON que está na mesma pasta da home
     const response = await fetch('./posts.json');
+    if (!response.ok) throw new Error('Não foi possível carregar o posts.json');
+    
     todosOsPosts = await response.json();
     
     gerarBotoesDeTags(todosOsPosts);
     renderizarPosts(todosOsPosts);
   } catch (erro) {
     console.error('Erro ao carregar os artigos:', erro);
+    document.getElementById('posts-container').innerHTML = '<p>Erro ao carregar as publicações.</p>';
   }
 }
 
@@ -70,14 +74,11 @@ function renderizarPosts(posts) {
 
 // Filtra os posts ao clicar na tag
 function filtrarPosts(tag, elementoClicado) {
-  // Atualiza classe ativa dos botões
   const botoes = document.querySelectorAll('.filter-btn');
   botoes.forEach(b => b.classList.remove('active'));
   
   if (elementoClicado) {
     elementoClicado.classList.add('active');
-  } else {
-    document.querySelector('.filter-btn').classList.add('active');
   }
 
   if (tag === 'todos') {

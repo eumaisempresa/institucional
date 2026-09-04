@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão e Futuro⁺ | Revista Digital de Liderança e IA</title>
+    <title>Gestão e Futuro⁺ | Revista Digital e Fóruns</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,8 @@
             --texto-principal: #EEF0F2;
             --texto-secundario: #7A8FA3;
             --bordas: rgba(196,151,74,0.18);
+            
+            /* Cores de Plataforma */
             --eu-vida: #4A9BC4;
             --eu-negocio: #C4A265;
             --eu-empreender: #E8720C;
@@ -102,7 +104,7 @@
             flex-wrap: wrap;
         }
 
-        .menu-navegacao a, .menu-navegacao button {
+        .menu-navegacao button, .menu-navegacao a {
             color: var(--texto-secundario);
             text-decoration: none;
             font-size: 13px;
@@ -115,8 +117,11 @@
             transition: color 0.3s;
         }
 
-        .menu-navegacao a:hover, .menu-navegacao button:hover { color: var(--dourado-principal); }
+        .menu-navegacao button.active, .menu-navegacao button:hover, .menu-navegacao a:hover {
+            color: var(--dourado-principal);
+        }
 
+        /* Seção de Publicações */
         .secao-catalogo { margin-bottom: 40px; }
 
         .cabecalho-secao {
@@ -209,66 +214,129 @@
             display: inline-block;
         }
 
-        /* Estilos dos Modais (Fórum e Publique Conosco) */
-        .modal {
+        /* ESTILOS DO FÓRUM (MODO CLARO E CLEAN) */
+        .secao-forum-clean {
             display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            justify-content: center;
+            background: #FFFFFF;
+            color: #2D3748;
+            border-radius: 8px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .modal-content {
-            background: var(--fundo-secundario);
+        .forum-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #060E18;
+        }
+
+        .btn-novo-topico {
+            background: var(--fundo-principal);
+            color: var(--dourado-principal);
             border: 1px solid var(--dourado-principal);
-            padding: 30px;
-            border-radius: 6px;
-            max-width: 650px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            color: var(--texto-secundario);
-            font-size: 24px; cursor: pointer;
-        }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; color: var(--dourado-principal); }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 10px; background: var(--fundo-terciario); border: 1px solid var(--bordas); color: #fff; border-radius: 4px; font-family: inherit;
-        }
-
-        .btn-submit {
+        .btn-novo-topico:hover {
             background: var(--dourado-principal);
             color: var(--fundo-principal);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            width: 100%;
         }
 
-        .forum-post {
-            background: var(--fundo-terciario);
-            border-left: 3px solid var(--dourado-principal);
-            padding: 15px;
+        .topico-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 20px;
             margin-bottom: 15px;
-            border-radius: 4px;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .forum-post h4 { color: var(--texto-principal); font-size: 16px; }
-        .forum-post p { font-size: 13px; color: var(--texto-secundario); margin: 5px 0; }
-        .forum-post .meta { font-size: 11px; color: var(--dourado-principal); }
+        .topico-card:hover {
+            border-color: var(--dourado-principal);
+            background: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .topico-card h3 {
+            font-size: 20px;
+            color: #1A202C;
+            margin-bottom: 6px;
+        }
+
+        .topico-meta {
+            font-size: 12px;
+            color: #718096;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Thread do Tópico Aberto */
+        .thread-container { display: none; }
+
+        .btn-voltar {
+            background: none;
+            border: none;
+            color: var(--dourado-principal);
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .topico-principal {
+            background: #EDF2F7;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 4px solid var(--dourado-principal);
+            margin-bottom: 30px;
+        }
+
+        .topico-principal h2 { font-size: 26px; color: #1A202C; margin-bottom: 10px; }
+        .topico-principal p { font-size: 15px; color: #4A5568; line-height: 1.7; }
+
+        .resposta-card {
+            border-bottom: 1px solid #E2E8F0;
+            padding: 18px 0;
+        }
+
+        .resposta-meta { font-size: 12px; color: #718096; font-weight: bold; margin-bottom: 6px; }
+        .resposta-texto { font-size: 14px; color: #2D3748; line-height: 1.6; }
+
+        .form-clean {
+            margin-top: 30px;
+            background: #F7FAFC;
+            padding: 25px;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .form-clean input, .form-clean textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CBD5E0;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            font-family: inherit;
+            font-size: 14px;
+        }
 
         /* Rodapé */
         .rodape-ecossistema {
@@ -333,14 +401,14 @@
             <div class="slogan-revista">Liderança, Inteligência Artificial e Emancipação Organizacional</div>
             
             <nav class="menu-navegacao">
-                <a href="#catalogo">Publicações</a>
-                <button onclick="abrirModal('modalPublique')">Publique Conosco</button>
-                <button onclick="abrirModalForum()">Fóruns</button>
+                <button id="btnNavPublicacoes" class="active" onclick="alternarAba('publicacoes')">Publicações</button>
+                <button id="btnNavForum" onclick="alternarAba('forum')">Fórums & Discussões</button>
                 <a href="https://wa.me/5527998131806?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20equipe%20da%20Revista%20Gest%C3%A3o%20e%20Futuro%E2%81%BA." target="_blank">Fale Conosco</a>
             </nav>
         </header>
 
-        <main class="secao-catalogo" id="catalogo">
+        <!-- SEÇÃO 1: PUBLICAÇÕES (ARTIGOS) -->
+        <main class="secao-catalogo" id="secaoPublicacoes">
             <div class="cabecalho-secao">
                 <h2>Catálogo de Edições & Matérias</h2>
             </div>
@@ -354,66 +422,49 @@
             </div>
         </main>
 
-        <!-- Modal Publique Conosco -->
-        <div id="modalPublique" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="fecharModal('modalPublique')">&times;</span>
-                <h3 style="color: var(--dourado-principal); margin-bottom: 15px;">Submeter Artigo para Aprovação</h3>
-                <form id="formArtigo" onsubmit="enviarArtigo(event)">
-                    <div class="form-group">
-                        <label>Seu Nome / Autor</label>
-                        <input type="text" id="autorArtigo" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Título do Artigo</label>
-                        <input type="text" id="tituloArtigo" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Resumo (Máximo de 180 caracteres)</label>
-                        <textarea id="resumoArtigo" maxlength="180" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Tags (separadas por vírgula)</label>
-                        <input type="text" id="tagsArtigo" placeholder="Ex: Gestão, Carreira" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Link da Publicação/Documento</label>
-                        <input type="url" id="urlArtigo" placeholder="https://..." required>
-                    </div>
-                    <button type="submit" class="btn-submit">Enviar para Análise</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Modal Fórum -->
-        <div id="modalForum" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="fecharModal('modalForum')">&times;</span>
-                <h3 style="color: var(--dourado-principal); margin-bottom: 15px;">Fórum & Comunidade</h3>
-                
-                <div id="listaForuns" style="margin-bottom: 20px;">
-                    <p style="color: var(--texto-secundario);">Carregando tópicos...</p>
+        <!-- SEÇÃO 2: FÓRUM CLEAN DE DISCUSSÃO -->
+        <main class="secao-forum-clean" id="secaoForum">
+            <!-- Nível 1: Lista de Tópicos -->
+            <div id="visaoListaTopicos">
+                <div class="forum-header">
+                    <h2>Fórum de Liderança e Gestão</h2>
+                    <button class="btn-novo-topico" onclick="exibirFormNovoTopico()">+ Criar Discussão</button>
                 </div>
 
-                <h4 style="color: var(--texto-principal); margin-bottom: 10px;">Novo Tópico ou Comentário</h4>
-                <form id="formForum" onsubmit="enviarForum(event)">
-                    <div class="form-group">
-                        <label>Seu Nome</label>
-                        <input type="text" id="autorForum" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tópico / Assunto</label>
-                        <input type="text" id="topicoForum" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Comentário ou Pergunta</label>
-                        <textarea id="comentarioForum" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Publicar no Fórum</button>
-                </form>
-            </div>
-        </div>
+                <!-- Form Novo Tópico -->
+                <div id="formNovoTopico" class="form-clean" style="display: none; margin-bottom: 25px;">
+                    <h3 style="margin-bottom: 15px; color: #1A202C;">Nova Discussão</h3>
+                    <input type="text" id="autorTopico" placeholder="Seu Nome">
+                    <input type="text" id="tituloTopico" placeholder="Título da Discussão">
+                    <textarea id="conteudoTopico" rows="4" placeholder="Escreva a introdução ou pergunta para a comunidade..."></textarea>
+                    <button class="btn-novo-topico" style="background: var(--dourado-principal); color: #fff;" onclick="salvarNovoTopico()">Publicar Tópico</button>
+                </div>
 
+                <div id="containerTopicos">
+                    <p style="color: #718096;">Carregando tópicos...</p>
+                </div>
+            </div>
+
+            <!-- Nível 2: Thread e Comentários do Tópico Aberto -->
+            <div id="visaoThreadTopico" class="thread-container">
+                <button class="btn-voltar" onclick="voltarParaListaTopicos()">← Voltar para Todos os Tópicos</button>
+                
+                <div id="detalheTopicoPrincipal"></div>
+
+                <h3 style="font-size: 20px; color: #1A202C; margin-bottom: 15px;">Respostas e Interações</h3>
+                <div id="containerRespostas"></div>
+
+                <!-- Formulário de Resposta -->
+                <div class="form-clean">
+                    <h4 style="margin-bottom: 10px; color: #1A202C;">Participar desta discussão</h4>
+                    <input type="text" id="autorResposta" placeholder="Seu Nome">
+                    <textarea id="textoResposta" rows="3" placeholder="Escreva seu ponto de vista ou resposta..."></textarea>
+                    <button class="btn-novo-topico" style="background: var(--dourado-principal); color: #fff;" onclick="salvarResposta()">Enviar Resposta</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- RODAPÉ DO ECOSSISTEMA EU+ -->
         <footer class="rodape-ecossistema">
             <div class="slogan-ecossistema">"Você é o EU. Nós somos o ⁺ que soma com você."</div>
 
@@ -459,21 +510,39 @@
         </footer>
     </div>
 
+    <!-- SCRIPT DE LÓGICA E INTEGRAÇÃO -->
     <script>
         const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbwqiY8Qa7TZ3ikm-NjRSZ6ejRQNoUVitzbayhi_TEGCdXvzPG8mSQina-D5ejT3qrMw/exec';
         let todosOsPosts = [];
+        let topicosForum = [];
+        let idTopicoAtivo = null;
 
+        // Alternar entre Seções no Menu
+        function alternarAba(aba) {
+            document.getElementById('btnNavPublicacoes').classList.remove('active');
+            document.getElementById('btnNavForum').classList.remove('active');
+
+            if (aba === 'publicacoes') {
+                document.getElementById('secaoPublicacoes').style.display = 'block';
+                document.getElementById('secaoForum').style.display = 'none';
+                document.getElementById('btnNavPublicacoes').classList.add('active');
+            } else {
+                document.getElementById('secaoPublicacoes').style.display = 'none';
+                document.getElementById('secaoForum').style.display = 'block';
+                document.getElementById('btnNavForum').classList.add('active');
+                carregarTopicosForum();
+            }
+        }
+
+        // CARREGAR PUBLICAÇÕES
         async function carregarPublicacoes() {
             try {
                 const response = await fetch(APPSCRIPT_URL);
-                if (!response.ok) throw new Error('Falha na conexão com a planilha.');
-                
                 todosOsPosts = await response.json();
                 gerarBotoesDeTags(todosOsPosts);
                 renderizarPosts(todosOsPosts);
             } catch (erro) {
-                console.error('Erro ao carregar artigos:', erro);
-                document.getElementById('posts-container').innerHTML = '<p style="color: var(--texto-secundario);">Erro ao carregar as publicações.</p>';
+                console.error('Erro:', erro);
             }
         }
 
@@ -503,17 +572,13 @@
             container.innerHTML = '';
 
             if (posts.length === 0) {
-                container.innerHTML = '<p style="color: var(--texto-secundario);">Nenhuma matéria encontrada.</p>';
+                container.innerHTML = '<p style="color: var(--texto-secundario);">Nenhuma matéria cadastrada.</p>';
                 return;
             }
 
             posts.forEach(post => {
                 const tagsArray = Array.isArray(post.tags) ? post.tags : (post.tags ? post.tags.split(',').map(t => t.trim()) : []);
-                
-                // Limitação de caracteres no front-end para 180 caracteres
-                const resumoFormatado = post.resumo && post.resumo.length > 180 
-                    ? post.resumo.substring(0, 180) + '...' 
-                    : (post.resumo || '');
+                const resumoFormatado = post.resumo && post.resumo.length > 180 ? post.resumo.substring(0, 180) + '...' : (post.resumo || '');
 
                 const card = document.createElement('article');
                 card.className = 'post-card';
@@ -549,62 +614,118 @@
             }
         }
 
-        // Funções dos Modais
-        function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
+        // LÓGICA DO FÓRUM CLEAN
+        async function carregarTopicosForum() {
+            const container = document.getElementById('containerTopicos');
+            container.innerHTML = '<p style="color: #718096;">Carregando discussões...</p>';
+            
+            try {
+                const res = await fetch(APPSCRIPT_URL + '?action=getTopicos');
+                topicosForum = await res.json();
 
-        // Submissão do Publique Conosco
-        async function enviarArtigo(e) {
-            e.preventDefault();
-            const dados = {
-                type: 'artigo',
-                autor: document.getElementById('autorArtigo').value,
-                titulo: document.getElementById('tituloArtigo').value,
-                resumo: document.getElementById('resumoArtigo').value,
-                tags: document.getElementById('tagsArtigo').value,
-                url: document.getElementById('urlArtigo').value
-            };
+                if (topicosForum.length === 0) {
+                    container.innerHTML = '<p style="color: #718096;">Nenhum tópico de discussão criado ainda. Seja o primeiro!</p>';
+                    return;
+                }
 
-            await fetch(APPSCRIPT_URL, { method: 'POST', body: JSON.stringify(dados) });
-            alert('Sua publicação foi enviada com sucesso e está aguardando aprovação do Administrador!');
-            fecharModal('modalPublique');
-            document.getElementById('formArtigo').reset();
+                container.innerHTML = topicosForum.map(t => `
+                    <div class="topico-card" onclick="abrirThreadTopico('${t.id}')">
+                        <h3>${t.titulo}</h3>
+                        <div class="topico-meta">
+                            <span>Iniciado por: <strong>${t.autor}</strong></span>
+                            <span>• Data: ${t.data}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<p style="color: #718096;">Erro ao carregar os tópicos.</p>';
+            }
         }
 
-        // Fóruns
-        async function abrirModalForum() {
-            abrirModal('modalForum');
-            const res = await fetch(APPSCRIPT_URL + '?action=getForuns');
-            const foruns = await res.json();
-            const container = document.getElementById('listaForuns');
-            
-            if (foruns.length === 0) {
-                container.innerHTML = '<p style="color: var(--texto-secundario);">Nenhum tópico criado ainda. Seja o primeiro!</p>';
+        function exibirFormNovoTopico() {
+            const form = document.getElementById('formNovoTopico');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function salvarNovoTopico() {
+            const autor = document.getElementById('autorTopico').value;
+            const titulo = document.getElementById('tituloTopico').value;
+            const conteudo = document.getElementById('conteudoTopico').value;
+
+            if (!autor || !titulo || !conteudo) return alert('Preencha todos os campos.');
+
+            await fetch(APPSCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ type: 'novo_topico', autor, titulo, conteudo })
+            });
+
+            document.getElementById('autorTopico').value = '';
+            document.getElementById('tituloTopico').value = '';
+            document.getElementById('conteudoTopico').value = '';
+            exibirFormNovoTopico();
+            carregarTopicosForum();
+        }
+
+        async function abrirThreadTopico(id) {
+            idTopicoAtivo = id;
+            const topico = topicosForum.find(t => String(t.id) === String(id));
+            if (!topico) return;
+
+            document.getElementById('visaoListaTopicos').style.display = 'none';
+            document.getElementById('visaoThreadTopico').style.display = 'block';
+
+            document.getElementById('detalheTopicoPrincipal').innerHTML = `
+                <div class="topico-principal">
+                    <h2>${topico.titulo}</h2>
+                    <p style="margin-bottom: 12px; font-weight: bold; color: #718096; font-size: 12px;">Iniciado por ${topico.autor} em ${topico.data}</p>
+                    <p>${topico.conteudo}</p>
+                </div>
+            `;
+
+            carregarRespostasThread(id);
+        }
+
+        async function carregarRespostasThread(id) {
+            const container = document.getElementById('containerRespostas');
+            container.innerHTML = '<p style="color: #718096;">Carregando interações...</p>';
+
+            const res = await fetch(APPSCRIPT_URL + '?action=getRespostas&id_topico=' + id);
+            const respostas = await res.json();
+
+            if (respostas.length === 0) {
+                container.innerHTML = '<p style="color: #718096; margin-bottom: 20px;">Nenhuma resposta registrada ainda. Adicione o seu comentário abaixo!</p>';
                 return;
             }
 
-            container.innerHTML = foruns.map(f => `
-                <div class="forum-post">
-                    <h4>${f.topico}</h4>
-                    <p>${f.comentario}</p>
-                    <div class="meta">Por ${f.autor} em ${f.data}</div>
+            container.innerHTML = respostas.map(r => `
+                <div class="resposta-card">
+                    <div class="resposta-meta">${r.autor} • ${r.data}</div>
+                    <div class="resposta-texto">${r.resposta}</div>
                 </div>
             `).join('');
         }
 
-        async function enviarForum(e) {
-            e.preventDefault();
-            const dados = {
-                type: 'forum',
-                autor: document.getElementById('autorForum').value,
-                topico: document.getElementById('topicoForum').value,
-                comentario: document.getElementById('comentarioForum').value
-            };
+        async function salvarResposta() {
+            const autor = document.getElementById('autorResposta').value;
+            const resposta = document.getElementById('textoResposta').value;
 
-            await fetch(APPSCRIPT_URL, { method: 'POST', body: JSON.stringify(dados) });
-            alert('Comentário adicionado ao Fórum!');
-            document.getElementById('formForum').reset();
-            abrirModalForum();
+            if (!autor || !resposta) return alert('Preencha seu nome e a resposta.');
+
+            await fetch(APPSCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ type: 'nova_resposta', id_topico: idTopicoAtivo, autor, resposta })
+            });
+
+            document.getElementById('autorResposta').value = '';
+            document.getElementById('textoResposta').value = '';
+            carregarRespostasThread(idTopicoAtivo);
+        }
+
+        function voltarParaListaTopicos() {
+            document.getElementById('visaoThreadTopico').style.display = 'none';
+            document.getElementById('visaoListaTopicos').style.display = 'block';
+            idTopicoAtivo = null;
+            carregarTopicosForum();
         }
 
         document.addEventListener('DOMContentLoaded', carregarPublicacoes);

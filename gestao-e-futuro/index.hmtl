@@ -1,94 +1,194 @@
-<!-- Seção de Filtros por Tag -->
-<div class="filter-container" id="tag-filters">
-  <button class="filter-btn active" onclick="filtrarPosts('todos', this)">Todos</button>
-</div>
-
-<!-- Grid onde os Cards dos Artigos serão inseridos -->
-<div class="posts-grid" id="posts-container">
-  <!-- Artigos carregados via JS -->
-</div>
-
-<script>
-let todosOsPosts = [];
-
-async function carregarPublicacoes() {
-  try {
-    // Carrega o JSON que está na mesma pasta da home
-    const response = await fetch('./posts.json');
-    if (!response.ok) throw new Error('Não foi possível carregar o posts.json');
-    
-    todosOsPosts = await response.json();
-    
-    gerarBotoesDeTags(todosOsPosts);
-    renderizarPosts(todosOsPosts);
-  } catch (erro) {
-    console.error('Erro ao carregar os artigos:', erro);
-    document.getElementById('posts-container').innerHTML = '<p>Erro ao carregar as publicações.</p>';
-  }
-}
-
-// Extrai as tags únicas do JSON e gera os botões automaticamente
-function gerarBotoesDeTags(posts) {
-  const filterContainer = document.getElementById('tag-filters');
-  const tagsSet = new Set();
-  
-  posts.forEach(post => {
-    if (post.tags) {
-      post.tags.forEach(tag => tagsSet.add(tag));
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão e Futuro⁺ | Catálogo de Publicações</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #333;
     }
-  });
+    .filter-container {
+      margin-bottom: 25px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background-color: #e9ecef;
+      border: 1px solid #ced4da;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background-color: #060E18;
+      color: #C4974A;
+      border-color: #060E18;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .post-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .post-tags {
+      margin-bottom: 10px;
+    }
+    .tag-badge {
+      font-size: 11px;
+      background: #f1f5f9;
+      color: #1a5276;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 5px;
+      display: inline-block;
+    }
+    .post-card h2 {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+    }
+    .post-card h2 a {
+      color: #060E18;
+      text-decoration: none;
+    }
+    .post-excerpt {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .read-more {
+      color: #C4974A;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
 
-  tagsSet.forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.innerText = tag;
-    btn.onclick = () => filtrarPosts(tag, btn);
-    filterContainer.appendChild(btn);
-  });
-}
+  <h1>Publicações • Gestão e Futuro⁺</h1>
 
-// Renderiza os cards na tela
-function renderizarPosts(posts) {
-  const container = document.getElementById('posts-container');
-  container.innerHTML = '';
+  <!-- Seção de Filtros por Tag -->
+  <div class="filter-container" id="tag-filters">
+    <button class="filter-btn active" onclick="filtrarPosts('todos', this)">Todos</button>
+  </div>
 
-  if (posts.length === 0) {
-    container.innerHTML = '<p>Nenhum artigo encontrado para esta tag.</p>';
-    return;
-  }
+  <!-- Grid onde os Cards dos Artigos serão inseridos -->
+  <div class="posts-grid" id="posts-container">
+    <p>Carregando publicações...</p>
+  </div>
 
-  posts.forEach(post => {
-    const card = document.createElement('article');
-    card.className = 'post-card';
-    card.innerHTML = `
-      <div class="post-tags">
-        ${post.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}
-      </div>
-      <h2><a href="${post.url}">${post.titulo}</a></h2>
-      <p class="post-excerpt">${post.resumo}</p>
-      <a href="${post.url}" class="read-more">Ler publicação →</a>
-    `;
-    container.appendChild(card);
-  });
-}
+  <script>
+    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbwqiY8Qa7TZ3ikm-NjRSZ6ejRQNoUVitzbayhi_TEGCdXvzPG8mSQina-D5ejT3qrMw/exec';
+    let todosOsPosts = [];
 
-// Filtra os posts ao clicar na tag
-function filtrarPosts(tag, elementoClicado) {
-  const botoes = document.querySelectorAll('.filter-btn');
-  botoes.forEach(b => b.classList.remove('active'));
-  
-  if (elementoClicado) {
-    elementoClicado.classList.add('active');
-  }
+    async function carregarPublicacoes() {
+      try {
+        const response = await fetch(APPSCRIPT_URL);
+        if (!response.ok) throw new Error('Falha na conexão com a planilha.');
+        
+        todosOsPosts = await response.json();
+        
+        gerarBotoesDeTags(todosOsPosts);
+        renderizarPosts(todosOsPosts);
+      } catch (erro) {
+        console.error('Erro ao carregar do Google Sheets:', erro);
+        document.getElementById('posts-container').innerHTML = '<p>Erro ao carregar as publicações. Verifique a integração com o Google Sheets.</p>';
+      }
+    }
 
-  if (tag === 'todos') {
-    renderizarPosts(todosOsPosts);
-  } else {
-    const filtrados = todosOsPosts.filter(p => p.tags && p.tags.includes(tag));
-    renderizarPosts(filtrados);
-  }
-}
+    function gerarBotoesDeTags(posts) {
+      const filterContainer = document.getElementById('tag-filters');
+      const tagsSet = new Set();
+      
+      posts.forEach(post => {
+        if (post.tags) {
+          if (Array.isArray(post.tags)) {
+            post.tags.forEach(tag => tagsSet.add(tag));
+          } else if (typeof post.tags === 'string') {
+            post.tags.split(',').forEach(tag => tagsSet.add(tag.trim()));
+          }
+        }
+      });
 
-// Inicia o carregamento ao abrir a página
-document.addEventListener('DOMContentLoaded', carregarPublicacoes);
-</script>
+      tagsSet.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.innerText = tag;
+        btn.onclick = () => filtrarPosts(tag, btn);
+        filterContainer.appendChild(btn);
+      });
+    }
+
+    function renderizarPosts(posts) {
+      const container = document.getElementById('posts-container');
+      container.innerHTML = '';
+
+      if (posts.length === 0) {
+        container.innerHTML = '<p>Nenhum artigo encontrado.</p>';
+        return;
+      }
+
+      posts.forEach(post => {
+        const tagsArray = Array.isArray(post.tags) 
+          ? post.tags 
+          : (post.tags ? post.tags.split(',').map(t => t.trim()) : []);
+
+        const card = document.createElement('article');
+        card.className = 'post-card';
+        card.innerHTML = `
+          <div>
+            <div class="post-tags">
+              ${tagsArray.map(t => `<span class="tag-badge">${t}</span>`).join('')}
+            </div>
+            <h2><a href="${post.url || '#'}">${post.titulo || post.tema}</a></h2>
+            <p class="post-excerpt">${post.resumo || ''}</p>
+          </div>
+          <a href="${post.url || '#'}" class="read-more">Ler publicação →</a>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filtrarPosts(tag, elementoClicado) {
+      const botoes = document.querySelectorAll('.filter-btn');
+      botoes.forEach(b => b.classList.remove('active'));
+      
+      if (elementoClicado) {
+        elementoClicado.classList.add('active');
+      }
+
+      if (tag === 'todos') {
+        renderizarPosts(todosOsPosts);
+      } else {
+        const filtrados = todosOsPosts.filter(p => {
+          if (!p.tags) return false;
+          const tags = Array.isArray(p.tags) ? p.tags : p.tags.split(',').map(t => t.trim());
+          return tags.includes(tag);
+        });
+        renderizarPosts(filtrados);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarPublicacoes);
+  </script>
+</body>
+</html>

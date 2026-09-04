@@ -1,93 +1,229 @@
-<!-- Seção de Filtros por Tag -->
-<div class="filter-container" id="tag-filters">
-  <button class="filter-btn active" onclick="filtrarPosts('todos')">Todos</button>
-</div>
-
-<!-- Grid onde os Cards dos Artigos serão inseridos -->
-<div class="posts-grid" id="posts-container">
-  <!-- Artigos carregados via JS -->
-</div>
-
-<script>
-let todosOsPosts = [];
-
-async function carregarPublicacoes() {
-  try {
-    const response = await fetch('./posts.json');
-    todosOsPosts = await response.json();
-    
-    gerarBotoesDeTags(todosOsPosts);
-    renderizarPosts(todosOsPosts);
-  } catch (erro) {
-    console.error('Erro ao carregar os artigos:', erro);
-  }
-}
-
-// Extrai as tags únicas do JSON e gera os botões automaticamente
-function gerarBotoesDeTags(posts) {
-  const filterContainer = document.getElementById('tag-filters');
-  const tagsSet = new Set();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão e Futuro | EuMaisEmpresa</title>
   
-  posts.forEach(post => {
-    if (post.tags) {
-      post.tags.forEach(tag => tagsSet.add(tag));
+  <!-- Estilos para os Filtros e Cards de Artigos -->
+  <style>
+    .container-hub {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: system-ui, -apple-system, sans-serif;
     }
-  });
 
-  tagsSet.forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.innerText = tag;
-    btn.onclick = () => filtrarPosts(tag, btn);
-    filterContainer.appendChild(btn);
-  });
-}
+    .hub-header {
+      margin-bottom: 30px;
+    }
 
-// Renderiza os cards na tela
-function renderizarPosts(posts) {
-  const container = document.getElementById('posts-container');
-  container.innerHTML = '';
+    .hub-title {
+      font-size: 2.2rem;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
 
-  if (posts.length === 0) {
-    container.innerHTML = '<p>Nenhum artigo encontrado para esta tag.</p>';
-    return;
-  }
+    /* Container de Filtros */
+    .filter-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
 
-  posts.forEach(post => {
-    const card = document.createElement('article');
-    card.className = 'post-card';
-    card.innerHTML = `
-      <div class="post-tags">
-        ${post.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}
-      </div>
-      <h2><a href="${post.url}">${post.titulo}</a></h2>
-      <p class="post-excerpt">${post.resumo}</p>
-      <a href="${post.url}" class="read-more">Ler publicação →</a>
-    `;
-    container.appendChild(card);
-  });
-}
+    .filter-btn {
+      padding: 8px 18px;
+      border: 1px solid #e0e0e0;
+      background: #f9f9f9;
+      color: #333;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
 
-// Filtra os posts ao clicar na tag
-function filtrarPosts(tag, elementoClicado) {
-  // Atualiza classe ativa dos botões
-  const botoes = document.querySelectorAll('.filter-btn');
-  botoes.forEach(b => b.classList.remove('active'));
-  
-  if (elementoClicado) {
-    elementoClicado.classList.add('active');
-  } else {
-    document.querySelector('.filter-btn').classList.add('active');
-  }
+    .filter-btn:hover, .filter-btn.active {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
 
-  if (tag === 'todos') {
-    renderizarPosts(todosOsPosts);
-  } else {
-    const filtrados = todosOsPosts.filter(p => p.tags && p.tags.includes(tag));
-    renderizarPosts(filtrados);
-  }
-}
+    /* Grid de Cards */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
 
-// Inicia o carregamento ao abrir a página
-document.addEventListener('DOMContentLoaded', carregarPublicacoes);
-</script>
+    .post-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 24px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .tags-wrapper {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag-badge {
+      font-size: 0.75rem;
+      background: #f0f0f0;
+      color: #555;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .post-card h3 {
+      font-size: 1.3rem;
+      margin: 0 0 10px 0;
+      line-height: 1.4;
+    }
+
+    .post-card h3 a {
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    .post-card h3 a:hover {
+      text-decoration: underline;
+    }
+
+    .post-excerpt {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .read-more {
+      display: inline-block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MANTENHA AQUI O HEADER / TOPO PADRÃO DA SUA PÁGINA -->
+
+  <main class="container-hub">
+    <header class="hub-header">
+      <h1 class="hub-title">Gestão e Futuro</h1>
+      <p>Artigos, análises e reflexões sobre negócios, liderança e administração.</p>
+    </header>
+
+    <!-- Botões de Filtro por Tag -->
+    <div class="filter-container" id="tag-filters">
+      <button class="filter-btn active" onclick="filtrarPosts('todos', this)">Todos</button>
+    </div>
+
+    <!-- Onde os Cards serão renderizados -->
+    <section class="posts-grid" id="posts-container">
+      <!-- Carregado via JS -->
+    </section>
+  </main>
+
+  <!-- MANTENHA AQUI O RODAPÉ / FOOTER PADRÃO DA SUA PÁGINA -->
+
+  <!-- Script de Carregamento e Filtragem -->
+  <script>
+    let artigosGerais = [];
+
+    async function inicializarHub() {
+      try {
+        // Busca o arquivo JSON com os posts
+        const resposta = await fetch('./posts.json');
+        artigosGerais = await resposta.json();
+
+        gerarFiltrosDeTags(artigosGerais);
+        renderizarCards(artigosGerais);
+      } catch (erro) {
+        console.error("Erro ao carregar publicações:", erro);
+        document.getElementById('posts-container').innerHTML = '<p>Erro ao carregar artigos.</p>';
+      }
+    }
+
+    function gerarFiltrosDeTags(posts) {
+      const containerFiltros = document.getElementById('tag-filters');
+      const tagsUnicas = new Set();
+
+      posts.forEach(post => {
+        if (post.tags && Array.isArray(post.tags)) {
+          post.tags.forEach(tag => tagsUnicas.add(tag));
+        }
+      });
+
+      tagsUnicas.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.innerText = tag;
+        btn.onclick = (e) => filtrarPosts(tag, e.target);
+        containerFiltros.appendChild(btn);
+      });
+    }
+
+    function renderizarCards(posts) {
+      const grid = document.getElementById('posts-container');
+      grid.innerHTML = '';
+
+      if (posts.length === 0) {
+        grid.innerHTML = '<p>Nenhum artigo encontrado para esta tag.</p>';
+        return;
+      }
+
+      posts.forEach(item => {
+        const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag-badge">${t}</span>`).join('') : '';
+
+        const card = `
+          <article class="post-card">
+            <div>
+              <div class="tags-wrapper">${tagsHtml}</div>
+              <h3><a href="${item.url}">${item.titulo}</a></h3>
+              <p class="post-excerpt">${item.resumo}</p>
+            </div>
+            <a href="${item.url}" class="read-more">Ler publicação →</a>
+          </article>
+        `;
+        grid.innerHTML += card;
+      });
+    }
+
+    function filtrarPosts(tag, elemento) {
+      const botoes = document.querySelectorAll('.filter-btn');
+      botoes.forEach(b => b.classList.remove('active'));
+      elemento.classList.add('active');
+
+      if (tag === 'todos') {
+        renderizarCards(artigosGerais);
+      } else {
+        const filtrados = artigosGerais.filter(p => p.tags && p.tags.includes(tag));
+        renderizarCards(filtrados);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', inicializarHub);
+  </script>
+</body>
+</html>

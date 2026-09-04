@@ -1,489 +1,93 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão e Futuro⁺ | Hub de Publicações</title>
-    <!-- Fontes Oficiais do Ecossistema EU+ (Manual 1.7.2.2 & 1.7.5.8) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Kalam:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<!-- Seção de Filtros por Tag -->
+<div class="filter-container" id="tag-filters">
+  <button class="filter-btn active" onclick="filtrarPosts('todos')">Todos</button>
+</div>
+
+<!-- Grid onde os Cards dos Artigos serão inseridos -->
+<div class="posts-grid" id="posts-container">
+  <!-- Artigos carregados via JS -->
+</div>
+
+<script>
+let todosOsPosts = [];
+
+async function carregarPublicacoes() {
+  try {
+    const response = await fetch('./posts.json');
+    todosOsPosts = await response.json();
     
-    <style>
-        :root {
-            /* Paleta Oficial Ecossistema EU+ */
-            --fundo-principal: #060E18;
-            --fundo-secundario: #0A1624;
-            --fundo-terciario: #0E1E30;
-            --dourado-principal: #C4974A;
-            --dourado-secundario: #D4AA62;
-            --texto-principal: #EEF0F2;
-            --texto-secundario: #7A8FA3;
-            --bordas: rgba(196,151,74,0.18);
-            
-            /* Cores de Plataforma */
-            --eu-vida: #4A9BC4;
-            --eu-negocio: #C4A265;
-            --eu-empreender: #E8720C;
-            --eu-missao: #7AAD66;
-            --eu-executivo: #C4974A;
-            --eu-gestor-azul: #1A5276;
-        }
+    gerarBotoesDeTags(todosOsPosts);
+    renderizarPosts(todosOsPosts);
+  } catch (erro) {
+    console.error('Erro ao carregar os artigos:', erro);
+  }
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+// Extrai as tags únicas do JSON e gera os botões automaticamente
+function gerarBotoesDeTags(posts) {
+  const filterContainer = document.getElementById('tag-filters');
+  const tagsSet = new Set();
+  
+  posts.forEach(post => {
+    if (post.tags) {
+      post.tags.forEach(tag => tagsSet.add(tag));
+    }
+  });
 
-        body {
-            background-color: var(--fundo-principal);
-            color: var(--texto-principal);
-            font-family: 'DM Sans', sans-serif;
-            line-height: 1.6;
-            padding: 20px 10px;
-        }
+  tagsSet.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.innerText = tag;
+    btn.onclick = () => filtrarPosts(tag, btn);
+    filterContainer.appendChild(btn);
+  });
+}
 
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-        }
+// Renderiza os cards na tela
+function renderizarPosts(posts) {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = '';
 
-        /* Topo Institucional */
-        .topo-hierarquia {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--fundo-secundario);
-            padding: 12px 24px;
-            border-bottom: 1px solid var(--bordas);
-            border-radius: 4px 4px 0 0;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
+  if (posts.length === 0) {
+    container.innerHTML = '<p>Nenhum artigo encontrado para esta tag.</p>';
+    return;
+  }
 
-        .topo-hierarquia .plataforma {
-            color: var(--texto-secundario);
-        }
+  posts.forEach(post => {
+    const card = document.createElement('article');
+    card.className = 'post-card';
+    card.innerHTML = `
+      <div class="post-tags">
+        ${post.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}
+      </div>
+      <h2><a href="${post.url}">${post.titulo}</a></h2>
+      <p class="post-excerpt">${post.resumo}</p>
+      <a href="${post.url}" class="read-more">Ler publicação →</a>
+    `;
+    container.appendChild(card);
+  });
+}
 
-        .topo-hierarquia .produto {
-            color: var(--dourado-principal);
-            font-weight: 500;
-        }
+// Filtra os posts ao clicar na tag
+function filtrarPosts(tag, elementoClicado) {
+  // Atualiza classe ativa dos botões
+  const botoes = document.querySelectorAll('.filter-btn');
+  botoes.forEach(b => b.classList.remove('active'));
+  
+  if (elementoClicado) {
+    elementoClicado.classList.add('active');
+  } else {
+    document.querySelector('.filter-btn').classList.add('active');
+  }
 
-        /* Banner / Header do Hub */
-        .header-revista {
-            text-align: center;
-            padding: 45px 20px;
-            background: radial-gradient(circle at center, var(--fundo-terciario) 0%, var(--fundo-principal) 100%);
-            border: 1px solid var(--bordas);
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            margin-bottom: 30px;
-        }
+  if (tag === 'todos') {
+    renderizarPosts(todosOsPosts);
+  } else {
+    const filtrados = todosOsPosts.filter(p => p.tags && p.tags.includes(tag));
+    renderizarPosts(filtrados);
+  }
+}
 
-        .logo-revista {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 600;
-            color: var(--texto-principal);
-            letter-spacing: 2px;
-            display: inline-block;
-        }
-
-        .simbolo-sobrescrito {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--dourado-principal);
-            vertical-align: super;
-            margin-left: 2px;
-        }
-
-        .slogan-revista {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 12px;
-            color: var(--dourado-principal);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 8px;
-        }
-
-        .divisor-dourado {
-            width: 80px;
-            height: 1px;
-            background: var(--dourado-principal);
-            margin: 16px auto 0 auto;
-        }
-
-        /* FILTROS E HUB DE CONTEÚDO */
-        .hub-container {
-            background-color: var(--fundo-secundario);
-            border: 1px solid var(--bordas);
-            padding: 35px 30px;
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            margin-bottom: 40px;
-        }
-
-        .filter-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--bordas);
-        }
-
-        .filter-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--texto-secundario);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 15px;
-        }
-
-        .filter-container {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--fundo-principal);
-            border: 1px solid var(--bordas);
-            color: var(--texto-secundario);
-            padding: 6px 16px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-family: 'DM Sans', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--dourado-principal);
-            color: var(--fundo-principal);
-            border-color: var(--dourado-principal);
-            font-weight: 600;
-        }
-
-        /* GRID DE CARDS DOS ARTIGOS */
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .post-card {
-            background: var(--fundo-terciario);
-            border: 1px solid var(--bordas);
-            border-radius: 4px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .post-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--dourado-principal);
-        }
-
-        .tags-wrapper {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .tag-badge {
-            font-size: 10px;
-            background: var(--fundo-secundario);
-            color: var(--dourado-principal);
-            border: 1px solid var(--bordas);
-            padding: 2px 8px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .post-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 12px;
-        }
-
-        .post-card h3 a {
-            color: var(--texto-principal);
-            text-decoration: none;
-        }
-
-        .post-card h3 a:hover {
-            color: var(--dourado-principal);
-        }
-
-        .post-excerpt {
-            color: var(--texto-secundario);
-            font-size: 13.5px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .read-more {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--dourado-principal);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .read-more:hover {
-            color: var(--dourado-secundario);
-            text-decoration: underline;
-        }
-
-        /* RODAPÉ DO ECOSSISTEMA EU+ */
-        .rodape-ecossistema {
-            margin-top: 40px;
-            background: var(--fundo-principal);
-            border-top: 2px solid var(--dourado-principal);
-            padding: 40px 20px 30px 20px;
-            color: var(--texto-principal);
-            border-radius: 4px;
-        }
-
-        .slogan-ecossistema {
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--dourado-principal);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        .grid-plataformas {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        @media (max-width: 900px) {
-            .grid-plataformas { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        }
-        @media (max-width: 600px) {
-            .grid-plataformas { grid-template-columns: 1fr; }
-        }
-
-        .item-plataforma .nome {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .item-plataforma .desc {
-            font-size: 10.5px;
-            color: var(--texto-secundario);
-            line-height: 1.3;
-            margin-bottom: 6px;
-        }
-
-        .item-plataforma a {
-            font-size: 10px;
-            color: var(--dourado-principal);
-            text-decoration: none;
-        }
-
-        .p-vida { color: var(--eu-vida); }
-        .p-negocio { color: var(--eu-negocio); }
-        .p-empreender { color: var(--eu-empreender); }
-        .p-missao { color: var(--eu-missao); }
-        .p-executivo { color: var(--eu-executivo); }
-        .p-gestor { color: var(--dourado-secundario); }
-
-        .assinatura-hierarquia {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid var(--bordas);
-            font-size: 12px;
-            color: var(--texto-secundario);
-            letter-spacing: 0.5px;
-        }
-
-        .assinatura-hierarquia strong {
-            color: var(--texto-principal);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Topo da Hierarquia -->
-        <div class="topo-hierarquia">
-            <span class="plataforma">Ecossistema EU⁺ &gt; EU⁺ Gestor &gt; Edição Digital</span>
-            <span class="produto">REVISTA GESTÃO E FUTURO</span>
-        </div>
-
-        <!-- Header da Revista -->
-        <header class="header-revista">
-            <div class="logo-revista">
-                Gestão & Futuro<span class="simbolo-sobrescrito">⁺</span>
-            </div>
-            <div class="slogan-revista">Liderança, Inteligência Artificial e Emancipação Organizacional</div>
-            <div class="divisor-dourado"></div>
-        </header>
-
-        <!-- HUB DE PUBLICAÇÕES -->
-        <main class="hub-container">
-            <div class="filter-section">
-                <div class="filter-title">Filtrar por tema ou tag:</div>
-                <div class="filter-container" id="tag-filters">
-                    <button class="filter-btn active" onclick="filtrarPosts('todos', this)">Todos</button>
-                </div>
-            </div>
-
-            <!-- Grid onde as matérias são renderizadas via JS -->
-            <section class="posts-grid" id="posts-container">
-                <!-- Posts injetados dinamicamente via Javascript -->
-            </section>
-        </main>
-
-        <!-- RODAPÉ DO ECOSSISTEMA EU+ -->
-        <footer class="rodape-ecossistema">
-            <div class="slogan-ecossistema">
-                "Você é o EU. Nós somos o ⁺ que soma com você."
-            </div>
-
-            <div class="grid-plataformas">
-                <div class="item-plataforma">
-                    <div class="nome p-vida">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Vida</div>
-                    <div class="desc">Organize sua vida antes que a vida organize você.</div>
-                    <a href="https://instagram.com/eumaisvida" target="_blank">@eumaisvida</a>
-                </div>
-                <div class="item-plataforma">
-                    <div class="nome p-negocio">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Negócio</div>
-                    <div class="desc">Mais controle. Mais clareza. Mais gestão.</div>
-                    <a href="https://instagram.com/eumaisnegocio" target="_blank">@eumaisnegocio</a>
-                </div>
-                <div class="item-plataforma">
-                    <div class="nome p-empreender">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Empreender</div>
-                    <div class="desc">Transformando ideias em operações reais.</div>
-                    <a href="https://instagram.com/eumaisempreender" target="_blank">@eumaisempreender</a>
-                </div>
-                <div class="item-plataforma">
-                    <div class="nome p-missao">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Missão</div>
-                    <div class="desc">Propósito também precisa de estrutura.</div>
-                    <a href="https://instagram.com/eumaismissao" target="_blank">@eumaismissao</a>
-                </div>
-                <div class="item-plataforma">
-                    <div class="nome p-executivo">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Executivo</div>
-                    <div class="desc">Estrutura para quem lidera.</div>
-                    <a href="https://instagram.com/eumaisexecutivo" target="_blank">@eumaisexecutivo</a>
-                </div>
-                <div class="item-plataforma">
-                    <div class="nome p-gestor">EU<span class="simbolo-sobrescrito" style="font-size:10px;">⁺</span> Gestor</div>
-                    <div class="desc">Liderar é transformar direção em resultado.</div>
-                    <a href="https://instagram.com/eumaisgestor" target="_blank">@eumaisgestor</a>
-                </div>
-            </div>
-
-            <div class="assinatura-hierarquia">
-                Ecossistema EU⁺ &gt; <strong>EU⁺ Empresa</strong> &gt; EU⁺ Gestor &gt; Revista Gestão e Futuro⁺<br>
-                <span style="font-size: 11px; color: var(--texto-secundario); margin-top: 6px; display: inline-block;">
-                    www.institucional.eumaisempresa.com.br • eumaisempresa@gmail.com • Serra, Espírito Santo
-                </span>
-            </div>
-        </footer>
-    </div>
-
-    <!-- SCRIPT DE CARREGAMENTO E FILTRAGEM DINÂMICA -->
-    <script>
-        let artigosGerais = [];
-
-        async function inicializarHub() {
-            try {
-                // Busca o JSON gerado automaticamente pelo Python / GitHub Action
-                const resposta = await fetch('./posts.json');
-                artigosGerais = await resposta.json();
-
-                gerarFiltrosDeTags(artigosGerais);
-                renderizarCards(artigosGerais);
-            } catch (erro) {
-                console.error("Erro ao carregar publicações:", erro);
-                document.getElementById('posts-container').innerHTML = '<p style="color:var(--texto-secundario);">Nenhuma publicação encontrada no momento.</p>';
-            }
-        }
-
-        function gerarFiltrosDeTags(posts) {
-            const containerFiltros = document.getElementById('tag-filters');
-            const tagsUnicas = new Set();
-
-            posts.forEach(post => {
-                if (post.tags && Array.isArray(post.tags)) {
-                    post.tags.forEach(tag => tagsUnicas.add(tag));
-                }
-            });
-
-            tagsUnicas.forEach(tag => {
-                const btn = document.createElement('button');
-                btn.className = 'filter-btn';
-                btn.innerText = tag;
-                btn.onclick = (e) => filtrarPosts(tag, e.target);
-                containerFiltros.appendChild(btn);
-            });
-        }
-
-        function renderizarCards(posts) {
-            const grid = document.getElementById('posts-container');
-            grid.innerHTML = '';
-
-            if (posts.length === 0) {
-                grid.innerHTML = '<p style="color:var(--texto-secundario);">Nenhum artigo encontrado para esta tag.</p>';
-                return;
-            }
-
-            posts.forEach(item => {
-                const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag-badge">${t}</span>`).join('') : '';
-
-                const card = `
-                    <article class="post-card">
-                        <div>
-                            <div class="tags-wrapper">${tagsHtml}</div>
-                            <h3><a href="${item.url}">${item.titulo}</a></h3>
-                            <p class="post-excerpt">${item.resumo}</p>
-                        </div>
-                        <a href="${item.url}" class="read-more">Ler publicação ➔</a>
-                    </article>
-                `;
-                grid.innerHTML += card;
-            });
-        }
-
-        function filtrarPosts(tag, elemento) {
-            const botoes = document.querySelectorAll('.filter-btn');
-            botoes.forEach(b => b.classList.remove('active'));
-            elemento.classList.add('active');
-
-            if (tag === 'todos') {
-                renderizarCards(artigosGerais);
-            } else {
-                const filtrados = artigosGerais.filter(p => p.tags && p.tags.includes(tag));
-                renderizarCards(filtrados);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', inicializarHub);
-    </script>
-</body>
-</html>
+// Inicia o carregamento ao abrir a página
+document.addEventListener('DOMContentLoaded', carregarPublicacoes);
+</script>
